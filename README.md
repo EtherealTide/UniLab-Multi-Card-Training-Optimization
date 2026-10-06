@@ -14,7 +14,24 @@
 
 ## 直接在 UniLab 中使用
 
-以下假设你已有可运行的 UniLab 环境，所用 `uni_rl` 已包含本文优化。只需要 UniLab 项目，不需要克隆本实验仓库或准备三个源码目录。命令在 UniLab 根目录执行；示例路径替换成你自己的路径。
+以下命令在已有 UniLab 环境中运行；示例路径替换成你自己的路径。**前提是当前 Python 实际导入的 `uni_rl` 已包含本文优化**，仅更新 UniLab 或本 README 不会更新其已安装依赖，`--no-sync` 也不会安装新版本。只有满足该前提，才可以仅使用 UniLab 项目直接启动优化后的双卡训练。
+
+先在 UniLab 根目录检查实际加载位置和图同步接口：
+
+```bash
+uvx uv@0.12.5 run --no-sync python -c 'import inspect; import uni_rl.algos.fast_sac.learner as m; print(m.__file__); print("graph hooks:", any(hasattr(c, "set_gradient_graph_hooks") for _, c in inspect.getmembers(m, inspect.isclass)))'
+```
+
+当前补丁的接口检查应为 `graph hooks: True`（这是识别本次实现的检查，不是所有未来版本的兼容性测试）。若报 `FastSAC NVIDIA CUDA whole-cycle mode does not support DP fallback`，实际加载的仍是带旧限制的代码；换 GPU、CPU 池或 uv 版本不能解决。这里不预设该优化已经发布到某个安装包版本。
+
+**已有优化源码的实验工作区**：若检查指向 `.venv/.../site-packages/uni_rl`，但修改后的源码在相邻 `unilab_rl/`，可在当前终端选择该源码，再重复检查及下方命令，无需重新应用补丁：
+
+```bash
+# 仅适用于现有 UniLabSim/UniLab 与 UniLabSim/unilab_rl 布局。
+export PYTHONPATH="$(realpath ../unilab_rl/src)${PYTHONPATH:+:$PYTHONPATH}"
+```
+
+如果只有 UniLab 且安装的 RL 依赖尚未包含优化，则还不满足直接启动这条优化路径的条件。
 
 ### 单卡与双卡对照（UniLab 自带 benchmark）
 
