@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/dp_probe.py",
+    "correctness",
+    "--output",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/enhanced_compiled.json",
+    "--compile-loss"
+  ],
+  "environment_overrides": {
+    "CUDA_VISIBLE_DEVICES": "0,1"
+  }
+}

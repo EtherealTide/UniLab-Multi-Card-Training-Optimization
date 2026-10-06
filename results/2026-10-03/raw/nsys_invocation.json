@@ -1,0 +1,20 @@
+[
+  "nsys",
+  "profile",
+  "--trace=cuda,nvtx,osrt",
+  "--sample=none",
+  "--cpuctxsw=none",
+  "--capture-range=cudaProfilerApi",
+  "--capture-range-end=stop",
+  "--cuda-graph-trace=node",
+  "-o",
+  "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/nsys_steady",
+  "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+  "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/nsys_training.py",
+  "task=g1_walk_flat/mujoco",
+  "training.no_play=true",
+  "algo.max_iterations=210",
+  "training.devices=[0,1]",
+  "training.trace_enabled=false",
+  "training.log_dir=/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/nsys_training"
+]

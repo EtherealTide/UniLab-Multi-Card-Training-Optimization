@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "timestamp_utc": "2026-10-02T14:14:28.607182+00:00",
+    "benchmark": "offpolicy_dp_scaling",
+    "issue": 968,
+    "commit": "0fd2bd5d72210ad685838ade4ba4687b269f7de2",
+    "device": {
+      "platform": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+      "chip": "Intel(R) Xeon(R) Platinum 8380 CPU @ 2.30GHz",
+      "cpu_total_cores": "80",
+      "cpu_performance_cores": "unknown",
+      "cpu_efficiency_cores": "unknown",
+      "gpu_name": "NVIDIA GeForce RTX 5090",
+      "memory": "1007.5 GB",
+      "gpu_memory": "32607 MiB"
+    },
+    "params": {
+      "route_overrides": [
+        "task=g1_walk_flat/mujoco"
+      ],
+      "iterations": 200,
+      "devices": [
+        0,
+        1
+      ],
+      "extra_overrides": [
+        "training.trace_enabled=true"
+      ],
+      "scaling_pass_threshold": 1.7,
+      "steady_state_tail_fraction": 0.5,
+      "throughput_tags": {
+        "collector_steps_per_sec": [
+          "Perf/total_fps",
+          "perf/steps_per_sec"
+        ],
+        "learner_samples_per_sec": [
+          "perf/effective_samples_per_sec",
+          "perf/learner_samples_per_sec"
+        ],
+        "learner_samples_per_sec_derived": "world_size * algo.batch_size * algo.updates_per_step / Perf/iteration_time"
+      }
+    }
+  },
+  "results": [
+    {
+      "config": "n1",
+      "world_size": 1,
+      "devices": null,
+      "status": "ok",
+      "error": null,
+      "metrics": {
+        "run_dir": "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/scripts/benchmark/outputs/offpolicy_dp_scaling/runs/n1",
+        "world_size": 1,
+        "completed_iterations": 200,
+        "total_env_steps": 428032,
+        "training_wall_time_sec": 12.725791215896606,
+        "num_collector_throughput_samples": 200,
+        "num_learner_throughput_samples": 200,
+        "learner_throughput_source": "derived",
+        "steady_state_collector_steps_per_s": 32566.929765625,
+        "steady_state_learner_samples_per_s": 1042141.7526411444,
+        "final_mean_reward": 13.606722831726074,
+        "mean_dp_sync_time_sec": null
+      },
+      "collector_scaling_vs_n1": null,
+      "learner_scaling_vs_n1": null,
+      "verdict": null
+    },
+    {
+      "config": "n2",
+      "world_size": 2,
+      "devices": [
+        0,
+        1
+      ],
+      "status": "failed",
+      "error": "training subprocess exited with code 1: /mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python /mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/src/unilab/scripts/train_sac.py task=g1_walk_flat/mujoco training.no_play=true algo.max_iterations=200 training.log_dir=/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/scripts/benchmark/outputs/offpolicy_dp_scaling/runs/n2 training.devices=[0,1] training.trace_enabled=true",
+      "metrics": null,
+      "collector_scaling_vs_n1": null,
+      "learner_scaling_vs_n1": null,
+      "verdict": null
+    }
+  ]
+}

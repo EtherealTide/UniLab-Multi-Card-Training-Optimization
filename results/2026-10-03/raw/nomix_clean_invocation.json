@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/run_matrix.py",
+    "n2_shm",
+    "--prefix",
+    "nomix_clean",
+    "--trace"
+  ],
+  "environment_overrides": {
+    "NCCL_GRAPH_MIXING_SUPPORT": "0"
+  }
+}

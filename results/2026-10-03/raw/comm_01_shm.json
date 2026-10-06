@@ -1,0 +1,412 @@
+{
+  "passed": true,
+  "ranks": [
+    {
+      "rank": 0,
+      "device": "NVIDIA GeForce RTX 5090",
+      "mode": "communication",
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0,1",
+        "NCCL_P2P_DISABLE": "1",
+        "NCCL_SHM_DISABLE": "0",
+        "NCCL_ALGO": null,
+        "NCCL_PROTO": null
+      },
+      "torch": "2.14.0+cu130",
+      "cuda": "13.0",
+      "nccl": [
+        2,
+        30,
+        7
+      ],
+      "passed": true,
+      "measurements": [
+        {
+          "bytes": 4,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 61.005669995211065,
+              "cuda_us_per_call": 60.421438217163086
+            },
+            {
+              "wall_us_per_call": 59.49293961748481,
+              "cuda_us_per_call": 59.26688194274902
+            },
+            {
+              "wall_us_per_call": 58.198029873892665,
+              "cuda_us_per_call": 57.98175811767578
+            }
+          ]
+        },
+        {
+          "bytes": 4,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 118.08368959464133,
+              "cuda_us_per_call": 117.73504257202148
+            },
+            {
+              "wall_us_per_call": 121.18494021706283,
+              "cuda_us_per_call": 120.96863746643066
+            },
+            {
+              "wall_us_per_call": 116.52219982352108,
+              "cuda_us_per_call": 116.31135940551758
+            }
+          ]
+        },
+        {
+          "bytes": 262144,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 57.968650362454355,
+              "cuda_us_per_call": 57.71455764770508
+            },
+            {
+              "wall_us_per_call": 62.89427983574569,
+              "cuda_us_per_call": 62.66784191131592
+            },
+            {
+              "wall_us_per_call": 58.499290025793016,
+              "cuda_us_per_call": 58.28320026397705
+            }
+          ]
+        },
+        {
+          "bytes": 262144,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 598.3181798364967,
+              "cuda_us_per_call": 598.070068359375
+            },
+            {
+              "wall_us_per_call": 563.3122602012008,
+              "cuda_us_per_call": 563.1046295166016
+            },
+            {
+              "wall_us_per_call": 556.0900800628588,
+              "cuda_us_per_call": 555.8889770507812
+            }
+          ]
+        },
+        {
+          "bytes": 1048576,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 149.90024967119098,
+              "cuda_us_per_call": 149.63775634765625
+            },
+            {
+              "wall_us_per_call": 149.7547997860238,
+              "cuda_us_per_call": 149.5315170288086
+            },
+            {
+              "wall_us_per_call": 149.77247978094965,
+              "cuda_us_per_call": 149.55039978027344
+            }
+          ]
+        },
+        {
+          "bytes": 1048576,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 613.4501699125394,
+              "cuda_us_per_call": 613.2150268554688
+            },
+            {
+              "wall_us_per_call": 567.8017099853605,
+              "cuda_us_per_call": 567.5948715209961
+            },
+            {
+              "wall_us_per_call": 590.1490699034184,
+              "cuda_us_per_call": 589.8934555053711
+            }
+          ]
+        },
+        {
+          "bytes": 8388608,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 997.3769501084462,
+              "cuda_us_per_call": 996.7469024658203
+            },
+            {
+              "wall_us_per_call": 998.8419199362397,
+              "cuda_us_per_call": 998.1858825683594
+            },
+            {
+              "wall_us_per_call": 997.1799899358302,
+              "cuda_us_per_call": 996.9625854492188
+            }
+          ]
+        },
+        {
+          "bytes": 8388608,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 1068.162249866873,
+              "cuda_us_per_call": 1067.946548461914
+            },
+            {
+              "wall_us_per_call": 1067.9766902467236,
+              "cuda_us_per_call": 1067.7139282226562
+            },
+            {
+              "wall_us_per_call": 1066.6588402818888,
+              "cuda_us_per_call": 1066.329574584961
+            }
+          ]
+        },
+        {
+          "bytes": 16777216,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 1957.483630394563,
+              "cuda_us_per_call": 1957.2787475585938
+            },
+            {
+              "wall_us_per_call": 1958.2984800217673,
+              "cuda_us_per_call": 1957.7967834472656
+            },
+            {
+              "wall_us_per_call": 1962.0719400700182,
+              "cuda_us_per_call": 1961.693115234375
+            }
+          ]
+        },
+        {
+          "bytes": 16777216,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 2028.7767000263557,
+              "cuda_us_per_call": 2028.5894775390625
+            },
+            {
+              "wall_us_per_call": 2030.5458700750023,
+              "cuda_us_per_call": 2030.2716064453125
+            },
+            {
+              "wall_us_per_call": 2027.2983401082456,
+              "cuda_us_per_call": 2027.1189880371094
+            }
+          ]
+        }
+      ],
+      "timing_note": "CUDA events include NCCL stream dependencies; flat measurement includes averaging scale kernel. Wall timing includes final synchronization. No topology performance inference without repeated trials."
+    },
+    {
+      "rank": 1,
+      "device": "NVIDIA GeForce RTX 5090",
+      "mode": "communication",
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0,1",
+        "NCCL_P2P_DISABLE": "1",
+        "NCCL_SHM_DISABLE": "0",
+        "NCCL_ALGO": null,
+        "NCCL_PROTO": null
+      },
+      "torch": "2.14.0+cu130",
+      "cuda": "13.0",
+      "nccl": [
+        2,
+        30,
+        7
+      ],
+      "passed": true,
+      "measurements": [
+        {
+          "bytes": 4,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 61.7579702520743,
+              "cuda_us_per_call": 61.04544162750244
+            },
+            {
+              "wall_us_per_call": 59.874560101889074,
+              "cuda_us_per_call": 59.62912082672119
+            },
+            {
+              "wall_us_per_call": 58.25893022119999,
+              "cuda_us_per_call": 58.039679527282715
+            }
+          ]
+        },
+        {
+          "bytes": 4,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 118.93753020558506,
+              "cuda_us_per_call": 118.56703758239746
+            },
+            {
+              "wall_us_per_call": 121.82773964013904,
+              "cuda_us_per_call": 121.5999984741211
+            },
+            {
+              "wall_us_per_call": 117.23784962669015,
+              "cuda_us_per_call": 117.02272415161133
+            }
+          ]
+        },
+        {
+          "bytes": 262144,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 58.06870001833886,
+              "cuda_us_per_call": 57.824320793151855
+            },
+            {
+              "wall_us_per_call": 62.79613997321576,
+              "cuda_us_per_call": 62.58624076843262
+            },
+            {
+              "wall_us_per_call": 58.390009799040854,
+              "cuda_us_per_call": 58.180480003356934
+            }
+          ]
+        },
+        {
+          "bytes": 262144,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 596.0770201636478,
+              "cuda_us_per_call": 595.8329772949219
+            },
+            {
+              "wall_us_per_call": 565.528140286915,
+              "cuda_us_per_call": 565.3078460693359
+            },
+            {
+              "wall_us_per_call": 558.1602500751615,
+              "cuda_us_per_call": 557.9580688476562
+            }
+          ]
+        },
+        {
+          "bytes": 1048576,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 150.17619007267058,
+              "cuda_us_per_call": 149.86656188964844
+            },
+            {
+              "wall_us_per_call": 150.05349996499717,
+              "cuda_us_per_call": 149.7283172607422
+            },
+            {
+              "wall_us_per_call": 150.05158027634025,
+              "cuda_us_per_call": 149.76863861083984
+            }
+          ]
+        },
+        {
+          "bytes": 1048576,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 614.9858701974154,
+              "cuda_us_per_call": 614.7353744506836
+            },
+            {
+              "wall_us_per_call": 569.1953602945432,
+              "cuda_us_per_call": 568.9638519287109
+            },
+            {
+              "wall_us_per_call": 592.0613399939612,
+              "cuda_us_per_call": 591.8435287475586
+            }
+          ]
+        },
+        {
+          "bytes": 8388608,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 998.2639603549615,
+              "cuda_us_per_call": 997.4825286865234
+            },
+            {
+              "wall_us_per_call": 999.7021500021219,
+              "cuda_us_per_call": 998.7757110595703
+            },
+            {
+              "wall_us_per_call": 997.8851804044098,
+              "cuda_us_per_call": 997.5766754150391
+            }
+          ]
+        },
+        {
+          "bytes": 8388608,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 1068.9279099460691,
+              "cuda_us_per_call": 1068.6406707763672
+            },
+            {
+              "wall_us_per_call": 1068.6684399843216,
+              "cuda_us_per_call": 1068.4288024902344
+            },
+            {
+              "wall_us_per_call": 1068.4819397283718,
+              "cuda_us_per_call": 1068.2511901855469
+            }
+          ]
+        },
+        {
+          "bytes": 16777216,
+          "kind": "flat_allreduce",
+          "trials": [
+            {
+              "wall_us_per_call": 1959.057489875704,
+              "cuda_us_per_call": 1958.7762451171875
+            },
+            {
+              "wall_us_per_call": 1960.6495299376547,
+              "cuda_us_per_call": 1959.3177795410156
+            },
+            {
+              "wall_us_per_call": 1960.7093196827918,
+              "cuda_us_per_call": 1960.0460815429688
+            }
+          ]
+        },
+        {
+          "bytes": 16777216,
+          "kind": "dp_pack_allreduce_unpack",
+          "trials": [
+            {
+              "wall_us_per_call": 2030.296369921416,
+              "cuda_us_per_call": 2029.9519348144531
+            },
+            {
+              "wall_us_per_call": 2030.7309099007398,
+              "cuda_us_per_call": 2030.4127502441406
+            },
+            {
+              "wall_us_per_call": 2029.851190163754,
+              "cuda_us_per_call": 2029.6131896972656
+            }
+          ]
+        }
+      ],
+      "timing_note": "CUDA events include NCCL stream dependencies; flat measurement includes averaging scale kernel. Wall timing includes final synchronization. No topology performance inference without repeated trials."
+    }
+  ],
+  "spawn_error": null
+}

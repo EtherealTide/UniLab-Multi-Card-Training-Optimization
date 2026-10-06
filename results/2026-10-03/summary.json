@@ -1,0 +1,66 @@
+{
+  "task": "g1_walk_flat/mujoco SAC",
+  "iterations": 1000,
+  "measurement": "Last 50% TensorBoard cumulative env-step delta / wall-time delta; trace disabled",
+  "per_rank": {
+    "num_envs": 2048,
+    "batch_size": 8192,
+    "critic_updates": 8,
+    "temperature_updates": 8,
+    "actor_updates": 2
+  },
+  "groups": {
+    "auto_cpu_single": {
+      "steps_per_second": [
+        31008.1833,
+        30708.929,
+        30580.3562
+      ],
+      "mean": 30765.822833333335,
+      "sample_sd": 219.5146648338643
+    },
+    "auto_cpu_dual": {
+      "steps_per_second": [
+        54089.9284,
+        54105.314,
+        50054.1963
+      ],
+      "mean": 52749.8129,
+      "sample_sd": 2334.4851294918317
+    },
+    "pool64_single": {
+      "steps_per_second": [
+        42506.532561947024,
+        46352.36425728082,
+        47670.955689688286
+      ],
+      "mean": 45509.95083630537,
+      "sample_sd": 2683.293096079306
+    },
+    "pool32_single": {
+      "steps_per_second": [
+        48057.32810078531,
+        51036.369313330266,
+        51488.86986244337
+      ],
+      "mean": 50194.18909218631,
+      "sample_sd": 1864.3552127117252
+    },
+    "pool32_per_rank_dual": {
+      "steps_per_second": [
+        107503.1606095645,
+        109619.5348190272,
+        108815.93907575014
+      ],
+      "mean": 108646.21150144727,
+      "sample_sd": 1068.3471045164936
+    }
+  },
+  "speedup_against_local32": 2.1645177154253528,
+  "interpretation": "End-to-end weak scaling with 32 physical simulation cores per rank; includes CPU pool, NUMA and collector changes, not pure GPU scaling. Convergence not evaluated.",
+  "validation": {
+    "cpu_suite": "388 passed,45 skipped,3 deselected",
+    "cuda_compile_tests": "32 passed",
+    "real_nccl_probes": "eager,Inductor,recapture,global finite skip passed"
+  }
+}

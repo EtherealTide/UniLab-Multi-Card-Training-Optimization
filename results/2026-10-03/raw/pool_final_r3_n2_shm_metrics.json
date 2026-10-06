@@ -1,0 +1,1286 @@
+{
+  "path": "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/pool_final_r3_n2_shm",
+  "summary": {
+    "status": "completed",
+    "completed_iterations": 1000,
+    "total_env_steps": 4132864,
+    "final_mean_reward": 22.673061255931856,
+    "best_mean_reward": 24.51160716724396,
+    "mean_episode_length": 92.18,
+    "last_checkpoint": "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/pool_final_r3_n2_shm/model_1000.pt",
+    "trace_path": null,
+    "training_wall_time_sec": 39.09381651878357,
+    "runtime_manifest": {
+      "inference_owner": "learner",
+      "collector_actor": false,
+      "collector_accelerator_context": false,
+      "collector_backend_device": null,
+      "collector_torch_inference": false,
+      "learner_actor_reused": true,
+      "logger_owner_rank": 0,
+      "logger_cross_rank_aggregation": true,
+      "cuda_graph": {
+        "backend": "inductor",
+        "critic": true,
+        "actor": true,
+        "device_finite_optimizer_gating": true,
+        "scope": "update_cycle",
+        "orchestration": "cuda_graph"
+      },
+      "dp_sync": {
+        "world_size": 2,
+        "backend": "nccl",
+        "mode": "gradient_mean_per_optimizer_step"
+      },
+      "replay_h2d_submitter": "gpu_resident_ingress",
+      "replay_device_submission_thread": "daemon",
+      "inference_slot_bytes": 1048576,
+      "actor_owned": false,
+      "weight_sync_attached": false,
+      "torch_inference": false,
+      "cuda_context_initialized": false
+    },
+    "final_env_steps_per_sec": 115859.9930970244,
+    "final_learner_replay_rows_per_sec": 3707519.779104781,
+    "final_cycle_wall_ms": 35.36161297233775,
+    "final_inference_ms": 1.4987305,
+    "final_inference_h2d_ms": 0.186546,
+    "final_inference_forward_ms": 1.1534079909324646,
+    "final_inference_d2h_ms": 0.087629,
+    "algo": "sac",
+    "task": "G1WalkFlat",
+    "sim_backend": "mujoco",
+    "log_dir": "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/pool_final_r3_n2_shm",
+    "start_time_utc": "2026-10-03T08:57:56.142531+00:00",
+    "end_time_utc": "2026-10-03T08:58:59.693024+00:00",
+    "wall_time_sec": 63.55048503400758,
+    "wandb_run_url": null,
+    "configured_seed": 1,
+    "configured_seed_source": "algo.seed",
+    "effective_seed": 1
+  },
+  "config": {
+    "run": {
+      "algo": "sac",
+      "task": "G1WalkFlat",
+      "sim_backend": "mujoco",
+      "device": "cuda:0",
+      "collector_device": null,
+      "log_dir": "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/pool_final_r3_n2_shm",
+      "start_time_utc": "2026-10-03T08:57:56.142531+00:00",
+      "hostname": "lyg2245",
+      "user": "liangyu",
+      "git": {
+        "commit": "0fd2bd5d72210ad685838ade4ba4687b269f7de2",
+        "branch": "main",
+        "dirty": false
+      },
+      "hardware": {
+        "platform": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+        "chip": "Intel(R) Xeon(R) Platinum 8380 CPU @ 2.30GHz",
+        "cpu_total_cores": "80",
+        "cpu_performance_cores": "unknown",
+        "cpu_efficiency_cores": "unknown",
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "memory": "1007.5 GB",
+        "gpu_memory": "32607 MiB"
+      },
+      "wandb": {
+        "project": "unilab",
+        "entity": null,
+        "name": "sac__G1WalkFlat__pool_final_r3_n2_shm",
+        "group": "G1WalkFlat",
+        "job_type": "sac",
+        "tags": [
+          "sac",
+          "G1WalkFlat",
+          "mujoco",
+          "user-liangyu"
+        ],
+        "notes": null,
+        "mode": null
+      },
+      "configured_seed": 1,
+      "configured_seed_source": "algo.seed",
+      "effective_seed": 1
+    },
+    "config": {
+      "algo": {
+        "algo": "sac",
+        "algo_log_name": "fast_sac",
+        "runtime_impl": null,
+        "runtime_resolver": null,
+        "load_run": "-1",
+        "seed": 1,
+        "num_envs": 2048,
+        "batch_size": 8192,
+        "replay_buffer_n": 512,
+        "updates_per_step": 8,
+        "learning_starts": 10,
+        "policy_frequency": 4,
+        "max_iterations": 1000,
+        "save_interval": 1000,
+        "gamma": 0.97,
+        "tau": 0.125,
+        "actor_lr": 0.0003,
+        "critic_lr": 0.0003,
+        "actor_hidden_dim": 512,
+        "critic_hidden_dim": 768,
+        "num_atoms": 101,
+        "obs_normalization": false,
+        "use_layer_norm": true,
+        "actor": {},
+        "algo_params": {
+          "alpha_lr": 0.0003,
+          "alpha_init": 0.001,
+          "target_entropy_ratio": 0.0,
+          "max_grad_norm": 0.0,
+          "amp_dtype": "auto",
+          "use_compile": true
+        }
+      },
+      "training": {
+        "task_name": "G1WalkFlat",
+        "devices": [
+          0,
+          1
+        ],
+        "dp_collector_cpu_ids": [
+          [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          [
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ]
+        ],
+        "logger": "tensorboard",
+        "log_interval": 1,
+        "wandb_project": "unilab",
+        "wandb_entity": null,
+        "wandb_group": null,
+        "wandb_job_type": null,
+        "wandb_name": null,
+        "wandb_tags": [],
+        "wandb_notes": null,
+        "wandb_mode": null,
+        "sim_backend": "mujoco",
+        "nan_guard": {
+          "enabled": true,
+          "buffer_size": 100,
+          "max_envs_to_dump": 5,
+          "output_dir": null
+        },
+        "use_amp": true,
+        "play_only": false,
+        "no_play": true,
+        "sim2sim_strict": true,
+        "play_render_mode": "auto",
+        "export_onnx": true,
+        "play_env_num": 16,
+        "play_steps": 800,
+        "cam_distance": 6.0,
+        "cam_elevation": -20.0,
+        "cam_azimuth": 90.0,
+        "log_root": null,
+        "log_dir": "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/pool_final_r3_n2_shm",
+        "env_steps_per_sync": 1,
+        "trace_enabled": false,
+        "trace_output_dir": null,
+        "trace_thread_time": false,
+        "trace_cuda_events": true,
+        "nvtx_profile_ranges": false,
+        "replay_prefetch_mode": "one_tick",
+        "torch_threads": {
+          "enabled": true,
+          "learner_num_threads": "auto",
+          "collector_num_threads": "auto",
+          "learner_num_interop_threads": 1,
+          "collector_num_interop_threads": 1,
+          "compile_threads": "auto",
+          "set_env_vars": true
+        }
+      },
+      "interactive": {
+        "action_mode": "zero",
+        "policy_obs_mode": "auto",
+        "show_target_bodies": false,
+        "show_reward_debug": false,
+        "target_show_axes": false,
+        "target_body_names": "",
+        "target_max_bodies": 0,
+        "target_marker_radius": 0.02,
+        "target_axis_length": 0.08,
+        "target_marker_alpha": 0.75,
+        "reward_debug_show_velocity": false,
+        "reward_debug_lin_vel_scale": 0.08,
+        "reward_debug_ang_vel_scale": 0.05,
+        "reward_debug_show_connectors": false,
+        "reward_debug_show_global_anchor": false,
+        "camera_follow_body": true,
+        "camera_focus_body_name": "",
+        "camera_height_offset": 0.15,
+        "camera_distance": null,
+        "camera_elevation": null,
+        "camera_azimuth": null,
+        "use_env_visual_model": true,
+        "speed": 1.0,
+        "start_paused": false,
+        "keyboard": false,
+        "keyboard_step_lin": 0.1,
+        "keyboard_step_ang": 0.2
+      },
+      "viser": {
+        "port": 8080,
+        "env_idx": 0,
+        "display_mode": "all",
+        "max_envs": 16
+      },
+      "env": {
+        "scene": {
+          "model_file": "src/unilab/assets/robots/g1/scene_flat.xml",
+          "default_keyframe_name": "stand",
+          "entities": {
+            "robot": {
+              "root_body_name": "pelvis",
+              "joint_names": [
+                "left_hip_pitch_joint",
+                "left_hip_roll_joint",
+                "left_hip_yaw_joint",
+                "left_knee_joint",
+                "left_ankle_pitch_joint",
+                "left_ankle_roll_joint",
+                "right_hip_pitch_joint",
+                "right_hip_roll_joint",
+                "right_hip_yaw_joint",
+                "right_knee_joint",
+                "right_ankle_pitch_joint",
+                "right_ankle_roll_joint",
+                "waist_yaw_joint",
+                "waist_roll_joint",
+                "waist_pitch_joint",
+                "left_shoulder_pitch_joint",
+                "left_shoulder_roll_joint",
+                "left_shoulder_yaw_joint",
+                "left_elbow_joint",
+                "left_wrist_roll_joint",
+                "left_wrist_pitch_joint",
+                "left_wrist_yaw_joint",
+                "right_shoulder_pitch_joint",
+                "right_shoulder_roll_joint",
+                "right_shoulder_yaw_joint",
+                "right_elbow_joint",
+                "right_wrist_roll_joint",
+                "right_wrist_pitch_joint",
+                "right_wrist_yaw_joint"
+              ],
+              "actuator_names": [
+                "left_hip_pitch_joint",
+                "left_hip_roll_joint",
+                "left_hip_yaw_joint",
+                "left_knee_joint",
+                "left_ankle_pitch_joint",
+                "left_ankle_roll_joint",
+                "right_hip_pitch_joint",
+                "right_hip_roll_joint",
+                "right_hip_yaw_joint",
+                "right_knee_joint",
+                "right_ankle_pitch_joint",
+                "right_ankle_roll_joint",
+                "waist_yaw_joint",
+                "waist_roll_joint",
+                "waist_pitch_joint",
+                "left_shoulder_pitch_joint",
+                "left_shoulder_roll_joint",
+                "left_shoulder_yaw_joint",
+                "left_elbow_joint",
+                "left_wrist_roll_joint",
+                "left_wrist_pitch_joint",
+                "left_wrist_yaw_joint",
+                "right_shoulder_pitch_joint",
+                "right_shoulder_roll_joint",
+                "right_shoulder_yaw_joint",
+                "right_elbow_joint",
+                "right_wrist_roll_joint",
+                "right_wrist_pitch_joint",
+                "right_wrist_yaw_joint"
+              ],
+              "body_names": [
+                "pelvis"
+              ]
+            }
+          }
+        },
+        "sim_dt": 0.006666666666666667,
+        "ctrl_dt": 0.02,
+        "max_episode_seconds": 20.0,
+        "observations": {
+          "policy": {
+            "enable_corruption": true,
+            "terms": {
+              "base_ang_vel": {
+                "func": "unilab.envs.mdp.builtin_sensor",
+                "params": {
+                  "sensor_name": "torso_gyro"
+                },
+                "scale": 0.25
+              },
+              "projected_gravity": {
+                "func": "unilab.envs.mdp.projected_gravity_from_sensor",
+                "params": {
+                  "sensor_name": "torso_upvector"
+                }
+              },
+              "joint_pos": {
+                "func": "unilab.envs.mdp.joint_pos_rel",
+                "noise": {
+                  "_target_": "unilab.managers._noise.UniformNoiseCfg",
+                  "n_min": -0.01,
+                  "n_max": 0.01,
+                  "operation": "add"
+                }
+              },
+              "joint_vel": {
+                "func": "unilab.envs.mdp.joint_vel_rel",
+                "scale": 0.05,
+                "noise": {
+                  "_target_": "unilab.managers._noise.UniformNoiseCfg",
+                  "n_min": -0.1,
+                  "n_max": 0.1,
+                  "operation": "add"
+                }
+              },
+              "actions": {
+                "func": "unilab.envs.mdp.last_action",
+                "params": {
+                  "action_name": "joint_pos"
+                }
+              },
+              "command": {
+                "func": "unilab.envs.mdp.generated_commands",
+                "params": {
+                  "command_name": "twist"
+                }
+              },
+              "gait_phase": {
+                "func": "unilab.tasks.locomotion.g1.manager_terms.G1GaitPhase",
+                "params": {
+                  "frequency": 1.5,
+                  "init_mode": "offset_phase"
+                }
+              }
+            }
+          },
+          "critic": {
+            "terms": {
+              "base_ang_vel": {
+                "func": "unilab.envs.mdp.builtin_sensor",
+                "params": {
+                  "sensor_name": "torso_gyro"
+                },
+                "scale": 0.25
+              },
+              "projected_gravity": {
+                "func": "unilab.envs.mdp.projected_gravity_from_sensor",
+                "params": {
+                  "sensor_name": "torso_upvector"
+                }
+              },
+              "joint_pos": {
+                "func": "unilab.envs.mdp.joint_pos_rel"
+              },
+              "joint_vel": {
+                "func": "unilab.envs.mdp.joint_vel_rel",
+                "scale": 0.05
+              },
+              "actions": {
+                "func": "unilab.envs.mdp.last_action",
+                "params": {
+                  "action_name": "joint_pos"
+                }
+              },
+              "command": {
+                "func": "unilab.envs.mdp.generated_commands",
+                "params": {
+                  "command_name": "twist"
+                }
+              },
+              "gait_phase": {
+                "func": "unilab.tasks.locomotion.g1.manager_terms.G1GaitPhase",
+                "params": {
+                  "frequency": 1.5,
+                  "init_mode": "offset_phase"
+                }
+              },
+              "base_lin_vel": {
+                "func": "unilab.envs.mdp.builtin_sensor",
+                "params": {
+                  "sensor_name": "pelvis_local_linvel"
+                },
+                "scale": 2.0
+              }
+            }
+          }
+        },
+        "actions": {
+          "joint_pos": {
+            "_target_": "unilab.envs.mdp.JointPositionActionCfg",
+            "entity_name": "robot",
+            "actuator_names": [
+              ".*"
+            ],
+            "scale": 1.0,
+            "use_default_offset": true
+          }
+        },
+        "commands": {
+          "twist": {
+            "_target_": "unilab.tasks.locomotion.g1.manager_terms.G1VelocityCommandCfg",
+            "entity_name": "robot",
+            "resampling_time_range": [
+              20.0,
+              20.0
+            ],
+            "heading_command": false,
+            "heading_control_stiffness": 0.5,
+            "rel_standing_envs": 0.0,
+            "rel_heading_envs": 0.0,
+            "rel_world_envs": 0.0,
+            "rel_forward_envs": 0.0,
+            "init_velocity_prob": 0.0,
+            "planar_dead_zone": 0.2,
+            "ranges": {
+              "lin_vel_x": [
+                -0.6,
+                1.0
+              ],
+              "lin_vel_y": [
+                -0.4,
+                0.4
+              ],
+              "ang_vel_z": [
+                -0.8,
+                0.8
+              ]
+            }
+          }
+        },
+        "events": {
+          "reset_scene_to_default": {
+            "func": "unilab.envs.mdp.reset_scene_to_default",
+            "mode": "reset"
+          },
+          "reset_root_state_uniform": {
+            "func": "unilab.envs.mdp.reset_root_state_uniform",
+            "mode": "reset",
+            "params": {
+              "pose_range": {
+                "x": [
+                  -0.5,
+                  0.5
+                ],
+                "y": [
+                  -0.5,
+                  0.5
+                ],
+                "z": [
+                  0.0,
+                  0.0
+                ],
+                "roll": [
+                  0.0,
+                  0.0
+                ],
+                "pitch": [
+                  0.0,
+                  0.0
+                ],
+                "yaw": [
+                  -3.141592653589793,
+                  3.141592653589793
+                ]
+              },
+              "velocity_range": {
+                "x": [
+                  -0.5,
+                  0.5
+                ],
+                "y": [
+                  -0.5,
+                  0.5
+                ],
+                "z": [
+                  -0.5,
+                  0.5
+                ],
+                "roll": [
+                  -0.5,
+                  0.5
+                ],
+                "pitch": [
+                  -0.5,
+                  0.5
+                ],
+                "yaw": [
+                  -0.5,
+                  0.5
+                ]
+              }
+            }
+          },
+          "pd_gains": {
+            "func": "unilab.envs.mdp.pd_gains",
+            "mode": "reset",
+            "params": {
+              "kp_range": [
+                0.9,
+                1.1
+              ],
+              "kd_range": [
+                0.9,
+                1.1
+              ],
+              "operation": "scale"
+            }
+          }
+        },
+        "terminations": {
+          "time_out": {
+            "func": "unilab.envs.mdp.time_out",
+            "time_out": true
+          },
+          "tilt": {
+            "func": "unilab.tasks.locomotion.g1.manager_terms.g1_tilt_exceeded",
+            "params": {
+              "max_tilt_deg": 65.0
+            }
+          },
+          "base_height": {
+            "func": "unilab.envs.mdp.root_height_below_minimum",
+            "params": {
+              "minimum_height": 0.3
+            }
+          }
+        },
+        "curriculum": {
+          "penalty_scaling": {
+            "func": "unilab.tasks.locomotion.g1.manager_terms.G1PenaltyCurriculum",
+            "params": {
+              "initial_scale": 0.125,
+              "min_scale": 0.125,
+              "max_scale": 0.25,
+              "level_down_threshold": 150.0,
+              "level_up_threshold": 750.0,
+              "degree": 0.001
+            }
+          }
+        },
+        "policy_observation_group": "policy",
+        "critic_observation_group": "critic"
+      },
+      "reward": {
+        "tracking_lin_vel": {
+          "func": "unilab.tasks.locomotion.common.sensor_reward_terms.track_lin_vel",
+          "weight": 2.0,
+          "params": {
+            "tracking_sigma": 0.25,
+            "command_name": "twist",
+            "sensor_name": "pelvis_local_linvel"
+          }
+        },
+        "tracking_ang_vel": {
+          "func": "unilab.tasks.locomotion.common.sensor_reward_terms.track_ang_vel",
+          "weight": 1.5,
+          "params": {
+            "tracking_sigma": 0.25,
+            "command_name": "twist",
+            "sensor_name": "torso_gyro"
+          }
+        },
+        "penalty_ang_vel_xy": {
+          "func": "unilab.tasks.locomotion.common.sensor_reward_terms.ang_vel_xy",
+          "weight": -1.0,
+          "params": {
+            "sensor_name": "torso_gyro"
+          }
+        },
+        "penalty_orientation": {
+          "func": "unilab.tasks.locomotion.common.sensor_reward_terms.orientation",
+          "weight": -10.0,
+          "params": {
+            "sensor_name": "torso_upvector"
+          }
+        },
+        "penalty_action_rate": {
+          "func": "unilab.envs.mdp.action_rate_l2",
+          "weight": -4.0
+        },
+        "pose": {
+          "func": "unilab.tasks.locomotion.g1.manager_terms.weighted_pose",
+          "weight": -0.5,
+          "params": {
+            "pose_weights": [
+              0.01,
+              1.0,
+              5.0,
+              0.01,
+              5.0,
+              5.0,
+              0.01,
+              1.0,
+              5.0,
+              0.01,
+              5.0,
+              5.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0,
+              50.0
+            ]
+          }
+        },
+        "penalty_feet_ori": {
+          "func": "unilab.tasks.locomotion.g1.manager_terms.penalty_feet_ori",
+          "weight": -20.0
+        },
+        "feet_phase": {
+          "func": "unilab.tasks.locomotion.g1.manager_terms.feet_phase",
+          "weight": 5.0,
+          "params": {
+            "frequency": 1.5,
+            "swing_height": 0.09,
+            "tracking_sigma": 0.04,
+            "min_forward_speed": 0.0,
+            "command_name": "twist"
+          }
+        },
+        "alive": {
+          "func": "unilab.tasks.locomotion.common.manager_terms.alive",
+          "weight": 10.0
+        }
+      }
+    },
+    "contract_snapshot": {
+      "env.observations": {
+        "policy": {
+          "enable_corruption": true,
+          "terms": {
+            "base_ang_vel": {
+              "func": "unilab.envs.mdp.builtin_sensor",
+              "params": {
+                "sensor_name": "torso_gyro"
+              },
+              "scale": 0.25
+            },
+            "projected_gravity": {
+              "func": "unilab.envs.mdp.projected_gravity_from_sensor",
+              "params": {
+                "sensor_name": "torso_upvector"
+              }
+            },
+            "joint_pos": {
+              "func": "unilab.envs.mdp.joint_pos_rel",
+              "noise": {
+                "_target_": "unilab.managers._noise.UniformNoiseCfg",
+                "n_min": -0.01,
+                "n_max": 0.01,
+                "operation": "add"
+              }
+            },
+            "joint_vel": {
+              "func": "unilab.envs.mdp.joint_vel_rel",
+              "scale": 0.05,
+              "noise": {
+                "_target_": "unilab.managers._noise.UniformNoiseCfg",
+                "n_min": -0.1,
+                "n_max": 0.1,
+                "operation": "add"
+              }
+            },
+            "actions": {
+              "func": "unilab.envs.mdp.last_action",
+              "params": {
+                "action_name": "joint_pos"
+              }
+            },
+            "command": {
+              "func": "unilab.envs.mdp.generated_commands",
+              "params": {
+                "command_name": "twist"
+              }
+            },
+            "gait_phase": {
+              "func": "unilab.tasks.locomotion.g1.manager_terms.G1GaitPhase",
+              "params": {
+                "frequency": 1.5,
+                "init_mode": "offset_phase"
+              }
+            }
+          }
+        },
+        "critic": {
+          "terms": {
+            "base_ang_vel": {
+              "func": "unilab.envs.mdp.builtin_sensor",
+              "params": {
+                "sensor_name": "torso_gyro"
+              },
+              "scale": 0.25
+            },
+            "projected_gravity": {
+              "func": "unilab.envs.mdp.projected_gravity_from_sensor",
+              "params": {
+                "sensor_name": "torso_upvector"
+              }
+            },
+            "joint_pos": {
+              "func": "unilab.envs.mdp.joint_pos_rel"
+            },
+            "joint_vel": {
+              "func": "unilab.envs.mdp.joint_vel_rel",
+              "scale": 0.05
+            },
+            "actions": {
+              "func": "unilab.envs.mdp.last_action",
+              "params": {
+                "action_name": "joint_pos"
+              }
+            },
+            "command": {
+              "func": "unilab.envs.mdp.generated_commands",
+              "params": {
+                "command_name": "twist"
+              }
+            },
+            "gait_phase": {
+              "func": "unilab.tasks.locomotion.g1.manager_terms.G1GaitPhase",
+              "params": {
+                "frequency": 1.5,
+                "init_mode": "offset_phase"
+              }
+            },
+            "base_lin_vel": {
+              "func": "unilab.envs.mdp.builtin_sensor",
+              "params": {
+                "sensor_name": "pelvis_local_linvel"
+              },
+              "scale": 2.0
+            }
+          }
+        }
+      },
+      "env.actions": {
+        "joint_pos": {
+          "_target_": "unilab.envs.mdp.JointPositionActionCfg",
+          "entity_name": "robot",
+          "actuator_names": [
+            ".*"
+          ],
+          "scale": 1.0,
+          "use_default_offset": true
+        }
+      },
+      "env.policy_observation_group": "policy",
+      "env.critic_observation_group": "critic",
+      "algo.obs_normalization": false,
+      "env.ctrl_dt": 0.02
+    }
+  },
+  "scalars": {
+    "Train/iteration": {
+      "n": 500,
+      "mean": 750.5,
+      "median": 751.0,
+      "p90": 951.0,
+      "last": 1000.0,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Loss/actor": {
+      "n": 500,
+      "mean": -5.71069579410553,
+      "median": -5.779007911682129,
+      "p90": -5.399012565612793,
+      "last": -6.055539131164551,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Loss/critic": {
+      "n": 500,
+      "mean": 3.6603481998443606,
+      "median": 3.6838207244873047,
+      "p90": 3.7324600219726562,
+      "last": 3.678955078125,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Loss/entropy": {
+      "n": 500,
+      "mean": -2.83730908382684,
+      "median": -0.6170930862426758,
+      "p90": 0.14856375753879547,
+      "last": -0.14805755019187927,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Loss/temperature": {
+      "n": 500,
+      "mean": -0.009828921792382971,
+      "median": -0.0021122628822922707,
+      "p90": 0.0014509910251945257,
+      "last": -5.314179725246504e-05,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/dp_gradient_sync_calls_per_rank": {
+      "n": 500,
+      "mean": 18.0,
+      "median": 18.0,
+      "p90": 18.0,
+      "last": 18.0,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Policy/temperature": {
+      "n": 500,
+      "mean": 0.004582420717459172,
+      "median": 0.00491142924875021,
+      "p90": 0.00524446927011013,
+      "last": 0.004855144768953323,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Train/actor_gradient_norm": {
+      "n": 500,
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0,
+      "last": 0.0,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Train/critic_gradient_norm": {
+      "n": 500,
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0,
+      "last": 0.0,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Train/target_q_max": {
+      "n": 500,
+      "mean": 9.086457927703858,
+      "median": 9.035253524780273,
+      "p90": 9.303260803222656,
+      "last": 9.3526611328125,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Train/target_q_min": {
+      "n": 500,
+      "mean": -0.1211431298982352,
+      "median": -0.1081128716468811,
+      "p90": -0.05480749532580376,
+      "last": -0.13946539163589478,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "reward/alive": {
+      "n": 497,
+      "mean": 10.0,
+      "median": 10.0,
+      "p90": 10.0,
+      "last": 10.0,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/feet_phase": {
+      "n": 497,
+      "mean": 4.4306241165944025,
+      "median": 4.439589977264404,
+      "p90": 4.463170051574707,
+      "last": 4.432503700256348,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/penalty_action_rate": {
+      "n": 497,
+      "mean": -1.786855698591267,
+      "median": -2.0052895545959473,
+      "p90": -1.1752331256866455,
+      "last": -2.11796498298645,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/penalty_ang_vel_xy": {
+      "n": 497,
+      "mean": -0.22065775636096355,
+      "median": -0.16875332593917847,
+      "p90": -0.13406215608119965,
+      "last": -0.13107380270957947,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/penalty_feet_ori": {
+      "n": 497,
+      "mean": -0.21256917001495898,
+      "median": -0.20632584393024445,
+      "p90": -0.14289242029190063,
+      "last": -0.13431057333946228,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/penalty_orientation": {
+      "n": 497,
+      "mean": -0.12113868443658894,
+      "median": -0.09840075671672821,
+      "p90": -0.07671606540679932,
+      "last": -0.07850763201713562,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/pose": {
+      "n": 497,
+      "mean": -1.1596997328687242,
+      "median": -0.8249197006225586,
+      "p90": -0.6133495569229126,
+      "last": -0.767340898513794,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/tracking_ang_vel": {
+      "n": 497,
+      "mean": 0.4463719993649834,
+      "median": 0.4674260914325714,
+      "p90": 0.5150402784347534,
+      "last": 0.4771527647972107,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "reward/tracking_lin_vel": {
+      "n": 497,
+      "mean": 0.7078089168973611,
+      "median": 0.7302151918411255,
+      "p90": 0.7790760397911072,
+      "last": 0.780240535736084,
+      "first_step": 2080768,
+      "last_step": 4132864,
+      "wall_seconds": 18.86439061164856
+    },
+    "Perf/collector_env_step_backend_ms": {
+      "n": 500,
+      "mean": 23.488741516113283,
+      "median": 23.410736083984375,
+      "p90": 24.777206420898438,
+      "last": 25.187040328979492,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_env_step_ms": {
+      "n": 500,
+      "mean": 32.846856060028074,
+      "median": 32.75205993652344,
+      "p90": 34.10670471191406,
+      "last": 34.25282669067383,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_env_step_reset_done_ms": {
+      "n": 500,
+      "mean": 3.759384575843811,
+      "median": 3.6899800300598145,
+      "p90": 4.069021701812744,
+      "last": 3.5586113929748535,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_env_step_update_state_ms": {
+      "n": 500,
+      "mean": 4.591779994010925,
+      "median": 4.567708969116211,
+      "p90": 4.68962287902832,
+      "last": 4.526034355163574,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_inference_request_ms": {
+      "n": 500,
+      "mean": 0.1296169658601284,
+      "median": 0.12769199907779694,
+      "p90": 0.14112499356269836,
+      "last": 0.14301200211048126,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_learner_action_wait_ms": {
+      "n": 500,
+      "mean": 3.6307449147701263,
+      "median": 3.0119574069976807,
+      "p90": 4.515238285064697,
+      "last": 2.0668959617614746,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/collector_replay_write_ms": {
+      "n": 500,
+      "mean": 0.788898843050003,
+      "median": 0.5142825245857239,
+      "p90": 0.5604720115661621,
+      "last": 0.49900949001312256,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/total_fps": {
+      "n": 500,
+      "mean": 118548.35496875,
+      "median": 119963.96875,
+      "p90": 124816.5078125,
+      "last": 115859.9921875,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_collector_wait_ms": {
+      "n": 500,
+      "mean": 8.576125298678875,
+      "median": 7.885313034057617,
+      "p90": 11.282362937927246,
+      "last": 12.01064395904541,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_inference_ms": {
+      "n": 500,
+      "mean": 1.4590548882484435,
+      "median": 1.4343329668045044,
+      "p90": 1.6316415071487427,
+      "last": 1.4987305402755737,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_collector_release_ms": {
+      "n": 500,
+      "mean": 0.04478789000958204,
+      "median": 0.043229490518569946,
+      "p90": 0.051596492528915405,
+      "last": 0.044818006455898285,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_replay_batch_wait_ms": {
+      "n": 500,
+      "mean": 0.02041820733062923,
+      "median": 0.010301009751856327,
+      "p90": 0.012222007848322392,
+      "last": 0.010906514711678028,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_replay_sample_ms": {
+      "n": 500,
+      "mean": 0.14011983473598957,
+      "median": 0.14136597514152527,
+      "p90": 0.1689945012331009,
+      "last": 0.16036400198936462,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learning_time": {
+      "n": 500,
+      "mean": 0.02458096382021904,
+      "median": 0.0245498139411211,
+      "p90": 0.02593839168548584,
+      "last": 0.021572444587945938,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_inference_h2d_ms": {
+      "n": 500,
+      "mean": 0.2102058448791504,
+      "median": 0.19902150332927704,
+      "p90": 0.2428790032863617,
+      "last": 0.18654599785804749,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_inference_forward_ms": {
+      "n": 500,
+      "mean": 1.0948725442886353,
+      "median": 1.0746240615844727,
+      "p90": 1.2191040515899658,
+      "last": 1.1534080505371094,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/learner_inference_d2h_ms": {
+      "n": 500,
+      "mean": 0.08596704189479351,
+      "median": 0.08397050201892853,
+      "p90": 0.09818349778652191,
+      "last": 0.08762899786233902,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/replay_ingress_h2d_submit_ms": {
+      "n": 500,
+      "mean": 0.7448949418663978,
+      "median": 0.23838099837303162,
+      "p90": 1.1158945560455322,
+      "last": 0.13901449739933014,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Perf/iteration_time": {
+      "n": 500,
+      "mean": 0.03490610329806804,
+      "median": 0.034159161150455475,
+      "p90": 0.03718731552362442,
+      "last": 0.03536161407828331,
+      "first_step": 2088960,
+      "last_step": 4132864,
+      "wall_seconds": 18.783130645751953
+    },
+    "Train/mean_reward": {
+      "n": 491,
+      "mean": 19.185205436287003,
+      "median": 19.341419219970703,
+      "p90": 22.436304092407227,
+      "last": 22.769878387451172,
+      "first_step": 2125824,
+      "last_step": 4132864,
+      "wall_seconds": 18.447041749954224
+    },
+    "Train/mean_episode_length": {
+      "n": 491,
+      "mean": 78.78355392953286,
+      "median": 78.5199966430664,
+      "p90": 90.55500030517578,
+      "last": 92.18000030517578,
+      "first_step": 2125824,
+      "last_step": 4132864,
+      "wall_seconds": 18.447041749954224
+    },
+    "Episode/timeout_rate": {
+      "n": 491,
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0,
+      "last": 0.0,
+      "first_step": 2125824,
+      "last_step": 4132864,
+      "wall_seconds": 18.447041749954224
+    }
+  },
+  "trace_phases": {}
+}

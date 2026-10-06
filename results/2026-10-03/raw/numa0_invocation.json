@@ -1,0 +1,14 @@
+{
+  "command": [
+    "numactl",
+    "--cpunodebind=0",
+    "--membind=0",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/run_matrix.py",
+    "n2_shm",
+    "--prefix",
+    "numa0",
+    "--trace"
+  ],
+  "environment_overrides": {}
+}

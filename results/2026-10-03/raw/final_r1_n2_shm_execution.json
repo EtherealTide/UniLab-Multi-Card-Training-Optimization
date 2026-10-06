@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/src/unilab/scripts/train_sac.py",
+    "task=g1_walk_flat/mujoco",
+    "training.no_play=true",
+    "algo.max_iterations=1000",
+    "training.log_dir=/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/final_r1_n2_shm",
+    "training.trace_enabled=false",
+    "training.devices=[0,1]"
+  ],
+  "environment_overrides": {
+    "NCCL_SHM_DISABLE": "0"
+  },
+  "revisions": {
+    "UniLab": "0fd2bd5d72210ad685838ade4ba4687b269f7de2",
+    "unilab_rl": "e2f18b4df1dcb0c35cd4c2dccd0517151633e53d",
+    "unisim": "783220d64ba7a207d316f1dd06ccd1a1db1261bc"
+  },
+  "rl_diff_sha256": "7853ebc7b5e987879cf91c5c8339bfc4412e70a74f7dde8e456c6c275b3c3492",
+  "exit_code": 0,
+  "process_wall_seconds": 130.8554375259555,
+  "logged_tail_fps": 68840.86151171874,
+  "actual_tail_fps": 54089.92838053869,
+  "learner_tail_ms": 41.48701103776693
+}

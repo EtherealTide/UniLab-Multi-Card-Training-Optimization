@@ -1,0 +1,3769 @@
+{
+  "tables": [
+    "ANALYSIS_DETAILS",
+    "ANALYSIS_FILE",
+    "CUDA_GRAPH_NODE_EVENTS",
+    "CUPTI_ACTIVITY_KIND_CUDA_EVENT",
+    "CUPTI_ACTIVITY_KIND_KERNEL",
+    "CUPTI_ACTIVITY_KIND_MEMCPY",
+    "CUPTI_ACTIVITY_KIND_MEMSET",
+    "CUPTI_ACTIVITY_KIND_RUNTIME",
+    "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION",
+    "DIAGNOSTIC_EVENT",
+    "ENUM_CUDA_DEV_MEM_EVENT_OPER",
+    "ENUM_CUDA_FUNC_CACHE_CONFIG",
+    "ENUM_CUDA_KERNEL_LAUNCH_TYPE",
+    "ENUM_CUDA_MEMCPY_OPER",
+    "ENUM_CUDA_MEMPOOL_OPER",
+    "ENUM_CUDA_MEMPOOL_TYPE",
+    "ENUM_CUDA_MEM_KIND",
+    "ENUM_CUDA_SHARED_MEM_LIMIT_CONFIG",
+    "ENUM_CUDA_UNIF_MEM_ACCESS_TYPE",
+    "ENUM_CUDA_UNIF_MEM_MIGRATION",
+    "ENUM_CUPTI_STREAM_TYPE",
+    "ENUM_CUPTI_SYNC_TYPE",
+    "ENUM_DIAGNOSTIC_SEVERITY_LEVEL",
+    "ENUM_DIAGNOSTIC_SOURCE_TYPE",
+    "ENUM_DIAGNOSTIC_TIMESTAMP_SOURCE",
+    "ENUM_NSYS_EVENT_CLASS",
+    "ENUM_NSYS_EVENT_TYPE",
+    "ENUM_NSYS_GENERIC_EVENT_FIELD_ETW_FLAGS",
+    "ENUM_NSYS_GENERIC_EVENT_FIELD_ETW_PROPERTY",
+    "ENUM_NSYS_GENERIC_EVENT_FIELD_ETW_TYPE",
+    "ENUM_NSYS_GENERIC_EVENT_FIELD_TYPE",
+    "ENUM_NSYS_GENERIC_EVENT_GROUP",
+    "ENUM_NSYS_GENERIC_EVENT_SOURCE",
+    "ENUM_SAMPLING_THREAD_STATE",
+    "ENUM_SCHEDULING_THREAD_BLOCK",
+    "ENUM_STACK_UNWIND_METHOD",
+    "META_DATA_CAPTURE",
+    "META_DATA_EXPORT",
+    "NVTX_EVENTS",
+    "NVTX_PAYLOAD_ENUMS",
+    "NVTX_PAYLOAD_ENUM_ENTRIES",
+    "NVTX_PAYLOAD_SCHEMAS",
+    "NVTX_PAYLOAD_SCHEMA_ENTRIES",
+    "OSRT_API",
+    "OSRT_CALLCHAINS",
+    "PROCESSES",
+    "PROFILER_OVERHEAD",
+    "ProcessStreams",
+    "StringIds",
+    "TARGET_INFO_CUDA_CONTEXT_INFO",
+    "TARGET_INFO_CUDA_DEVICE",
+    "TARGET_INFO_CUDA_STREAM",
+    "TARGET_INFO_GPU",
+    "TARGET_INFO_NIC_INFO",
+    "TARGET_INFO_SESSION_START_TIME",
+    "TARGET_INFO_SYSTEM_ENV",
+    "ThreadNames"
+  ],
+  "kernel_totals": [
+    {
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL",
+      "calls": 200,
+      "total_ms": 885.258076,
+      "mean_ms": 4.42629038,
+      "max_ms": 116.192856
+    },
+    {
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL",
+      "calls": 160,
+      "total_ms": 37.483854,
+      "mean_ms": 0.2342740875,
+      "max_ms": 18.441896
+    },
+    {
+      "name": "Kernel2",
+      "calls": 1880,
+      "total_ms": 25.7332,
+      "mean_ms": 0.013687872340425532,
+      "max_ms": 0.027744
+    },
+    {
+      "name": "triton_tem_fused__to_copy_addmm_silu_t_24",
+      "calls": 640,
+      "total_ms": 17.967724,
+      "mean_ms": 0.028074568749999997,
+      "max_ms": 0.031616
+    },
+    {
+      "name": "multi_tensor_apply_kernel",
+      "calls": 1800,
+      "total_ms": 11.327724,
+      "mean_ms": 0.006293180000000001,
+      "max_ms": 0.03392
+    },
+    {
+      "name": "vectorized_elementwise_kernel",
+      "calls": 10100,
+      "total_ms": 11.188808,
+      "mean_ms": 0.0011078027722772276,
+      "max_ms": 0.012768
+    },
+    {
+      "name": "triton_tem_fused__to_copy_add_addmm_cat_mul_t_tanh_20",
+      "calls": 640,
+      "total_ms": 10.525996,
+      "mean_ms": 0.016446868750000003,
+      "max_ms": 0.017088
+    },
+    {
+      "name": "triton_tem_fused_mm_20",
+      "calls": 400,
+      "total_ms": 9.984657,
+      "mean_ms": 0.024961642500000002,
+      "max_ms": 0.028608
+    },
+    {
+      "name": "elementwise_kernel",
+      "calls": 4720,
+      "total_ms": 8.579696,
+      "mean_ms": 0.0018177322033898307,
+      "max_ms": 0.030848
+    },
+    {
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL",
+      "calls": 20,
+      "total_ms": 8.563049,
+      "mean_ms": 0.42815245,
+      "max_ms": 6.823627
+    },
+    {
+      "name": "triton_per_fused__to_copy_native_layer_norm_native_layer_norm_backward_silu_backward_22",
+      "calls": 400,
+      "total_ms": 7.812985,
+      "mean_ms": 0.0195324625,
+      "max_ms": 0.028608
+    },
+    {
+      "name": "triton_tem_fused__to_copy_addmm_silu_t_28",
+      "calls": 640,
+      "total_ms": 6.872886,
+      "mean_ms": 0.010738884375,
+      "max_ms": 0.011584
+    },
+    {
+      "name": "reduce_kernel",
+      "calls": 960,
+      "total_ms": 6.655316,
+      "mean_ms": 0.006932620833333333,
+      "max_ms": 0.009504
+    },
+    {
+      "name": "triton_poi_fused__to_copy_native_layer_norm_21",
+      "calls": 400,
+      "total_ms": 4.930581,
+      "mean_ms": 0.0123264525,
+      "max_ms": 0.015872
+    },
+    {
+      "name": "triton_per_fused__to_copy_native_layer_norm_native_layer_norm_backward_silu_backward_14",
+      "calls": 400,
+      "total_ms": 4.452246,
+      "mean_ms": 0.011130615,
+      "max_ms": 0.013888
+    },
+    {
+      "name": "triton_tem_fused_mm_13",
+      "calls": 400,
+      "total_ms": 4.320824,
+      "mean_ms": 0.010802059999999999,
+      "max_ms": 0.01248
+    },
+    {
+      "name": "triton_tem_fused__to_copy_addmm_silu_t_32",
+      "calls": 640,
+      "total_ms": 3.378745,
+      "mean_ms": 0.0052792890625,
+      "max_ms": 0.00576
+    },
+    {
+      "name": "triton_red_fused__to_copy_native_layer_norm_native_layer_norm_backward_silu_backward_15",
+      "calls": 400,
+      "total_ms": 3.368249,
+      "mean_ms": 0.008420622499999999,
+      "max_ms": 0.010304
+    },
+    {
+      "name": "splitKreduce_kernel",
+      "calls": 1760,
+      "total_ms": 3.12089,
+      "mean_ms": 0.0017732329545454544,
+      "max_ms": 0.0024
+    },
+    {
+      "name": "_scatter_gather_elementwise_kernel",
+      "calls": 21,
+      "total_ms": 3.013308,
+      "mean_ms": 0.14349085714285714,
+      "max_ms": 0.149695
+    }
+  ],
+  "nccl_kernels": [
+    {
+      "deviceId": 0,
+      "start": 273404822,
+      "end": 280228449,
+      "ms": 6.823627,
+      "correlationId": 110,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 280220921,
+      "end": 280229113,
+      "ms": 0.008192,
+      "correlationId": 42,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 280429152,
+      "end": 281243326,
+      "ms": 0.814174,
+      "correlationId": 196,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 281237592,
+      "end": 281244376,
+      "ms": 0.006784,
+      "correlationId": 165,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 288722407,
+      "end": 312580158,
+      "ms": 23.857751,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 312137549,
+      "end": 312623021,
+      "ms": 0.485472,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 312696189,
+      "end": 331138085,
+      "ms": 18.441896,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 331132679,
+      "end": 331139783,
+      "ms": 0.007104,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 332118562,
+      "end": 335120089,
+      "ms": 3.001527,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 335023301,
+      "end": 335157445,
+      "ms": 0.134144,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 336253525,
+      "end": 336774164,
+      "ms": 0.520639,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 336329189,
+      "end": 336819077,
+      "ms": 0.489888,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 336890227,
+      "end": 337929904,
+      "ms": 1.039677,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 337924292,
+      "end": 337931012,
+      "ms": 0.00672,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 339004973,
+      "end": 339485707,
+      "ms": 0.480734,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 339043972,
+      "end": 339529828,
+      "ms": 0.485856,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 339602827,
+      "end": 340460584,
+      "ms": 0.857757,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 340455395,
+      "end": 340461443,
+      "ms": 0.006048,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 341537285,
+      "end": 342013732,
+      "ms": 0.476447,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 341574179,
+      "end": 342058915,
+      "ms": 0.484736,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 342130019,
+      "end": 342674850,
+      "ms": 0.544831,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 342669507,
+      "end": 342675939,
+      "ms": 0.006432,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 343747070,
+      "end": 344236125,
+      "ms": 0.489055,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 343794178,
+      "end": 344279586,
+      "ms": 0.485408,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 344351197,
+      "end": 344708347,
+      "ms": 0.35715,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 344703202,
+      "end": 344709538,
+      "ms": 0.006336,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 345688376,
+      "end": 346630390,
+      "ms": 0.942014,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 346536001,
+      "end": 346667393,
+      "ms": 0.131392,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 347758098,
+      "end": 348278609,
+      "ms": 0.520511,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 347832929,
+      "end": 348321313,
+      "ms": 0.488384,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 348393776,
+      "end": 348990990,
+      "ms": 0.597214,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 348985761,
+      "end": 348992353,
+      "ms": 0.006592,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 350069067,
+      "end": 350547050,
+      "ms": 0.477983,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 350106176,
+      "end": 350591616,
+      "ms": 0.48544,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 350661961,
+      "end": 351137224,
+      "ms": 0.475263,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 351131776,
+      "end": 351138368,
+      "ms": 0.006592,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 352211268,
+      "end": 352691811,
+      "ms": 0.480543,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 352250303,
+      "end": 352735135,
+      "ms": 0.484832,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 352805379,
+      "end": 352854339,
+      "ms": 0.04896,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 352849471,
+      "end": 352855263,
+      "ms": 0.005792,
+      "correlationId": 892,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 353704832,
+      "end": 353927903,
+      "ms": 0.223071,
+      "correlationId": 951,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 353920671,
+      "end": 353928927,
+      "ms": 0.008256,
+      "correlationId": 942,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 354113535,
+      "end": 354288318,
+      "ms": 0.174783,
+      "correlationId": 1017,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 354282719,
+      "end": 354289535,
+      "ms": 0.006816,
+      "correlationId": 1008,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 432302659,
+      "end": 505001546,
+      "ms": 72.698887,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 504646578,
+      "end": 504959857,
+      "ms": 0.313279,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 505075537,
+      "end": 505120816,
+      "ms": 0.045279,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 505116106,
+      "end": 505122538,
+      "ms": 0.006432,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 506098314,
+      "end": 506231466,
+      "ms": 0.133152,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 506102637,
+      "end": 506193965,
+      "ms": 0.091328,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 507324298,
+      "end": 507844008,
+      "ms": 0.51971,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 507400713,
+      "end": 507887593,
+      "ms": 0.48688,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 507959112,
+      "end": 508008392,
+      "ms": 0.04928,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 508002793,
+      "end": 508010345,
+      "ms": 0.007552,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 509080548,
+      "end": 509567939,
+      "ms": 0.487391,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 509122185,
+      "end": 509610536,
+      "ms": 0.488351,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 509682690,
+      "end": 509732130,
+      "ms": 0.04944,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 509726216,
+      "end": 509733736,
+      "ms": 0.00752,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 510808127,
+      "end": 511295646,
+      "ms": 0.487519,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 510847656,
+      "end": 511337256,
+      "ms": 0.4896,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 511410109,
+      "end": 511456957,
+      "ms": 0.046848,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 511451592,
+      "end": 511458952,
+      "ms": 0.00736,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 512524250,
+      "end": 513014264,
+      "ms": 0.490014,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 512568839,
+      "end": 513057351,
+      "ms": 0.488512,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 513128376,
+      "end": 513178424,
+      "ms": 0.050048,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 513172967,
+      "end": 513180455,
+      "ms": 0.007488,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 514157397,
+      "end": 514257044,
+      "ms": 0.099647,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 514160199,
+      "end": 514294471,
+      "ms": 0.134272,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 515387249,
+      "end": 515907247,
+      "ms": 0.519998,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 515459750,
+      "end": 515949030,
+      "ms": 0.48928,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 516022127,
+      "end": 516069327,
+      "ms": 0.0472,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 516063718,
+      "end": 516071014,
+      "ms": 0.007296,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 517138444,
+      "end": 517631306,
+      "ms": 0.492862,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 517184102,
+      "end": 517672934,
+      "ms": 0.488832,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 517746506,
+      "end": 517792266,
+      "ms": 0.04576,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 517787270,
+      "end": 517793734,
+      "ms": 0.006464,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 518867910,
+      "end": 519359013,
+      "ms": 0.491103,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 518913701,
+      "end": 519401381,
+      "ms": 0.48768,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 519475044,
+      "end": 519520580,
+      "ms": 0.045536,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 519515621,
+      "end": 519522053,
+      "ms": 0.006432,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 520976928,
+      "end": 520985216,
+      "ms": 0.008288,
+      "correlationId": 1873,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 520977124,
+      "end": 520985540,
+      "ms": 0.008416,
+      "correlationId": 1873,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 521262431,
+      "end": 521283999,
+      "ms": 0.021568,
+      "correlationId": 1939,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 521278820,
+      "end": 521284772,
+      "ms": 0.005952,
+      "correlationId": 1939,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 529474049,
+      "end": 600157737,
+      "ms": 70.683688,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 599802543,
+      "end": 600116846,
+      "ms": 0.314303,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 600233485,
+      "end": 600279149,
+      "ms": 0.045664,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 600274377,
+      "end": 600280969,
+      "ms": 0.006592,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 601256520,
+      "end": 601390056,
+      "ms": 0.133536,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 601265738,
+      "end": 601352010,
+      "ms": 0.086272,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 602480390,
+      "end": 603006949,
+      "ms": 0.526559,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 602560968,
+      "end": 603050568,
+      "ms": 0.4896,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 603123268,
+      "end": 603170148,
+      "ms": 0.04688,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 603165096,
+      "end": 603171624,
+      "ms": 0.006528,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 604247745,
+      "end": 604731263,
+      "ms": 0.483518,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 604286439,
+      "end": 604773671,
+      "ms": 0.487232,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 604846687,
+      "end": 604894335,
+      "ms": 0.047648,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 604888551,
+      "end": 604895975,
+      "ms": 0.007424,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 605969052,
+      "end": 606459322,
+      "ms": 0.49027,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 606013927,
+      "end": 606501799,
+      "ms": 0.487872,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 606574106,
+      "end": 606623834,
+      "ms": 0.049728,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 606618023,
+      "end": 606625543,
+      "ms": 0.00752,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 607697462,
+      "end": 608192629,
+      "ms": 0.495167,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 607745510,
+      "end": 608233670,
+      "ms": 0.48816,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 608349638,
+      "end": 614160452,
+      "ms": 5.810814,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 614154115,
+      "end": 614159267,
+      "ms": 0.005152,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 615139780,
+      "end": 615275011,
+      "ms": 0.135231,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 615142976,
+      "end": 615237727,
+      "ms": 0.094751,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 616364508,
+      "end": 616887898,
+      "ms": 0.52339,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 616443299,
+      "end": 616931235,
+      "ms": 0.487936,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 617002490,
+      "end": 617052538,
+      "ms": 0.050048,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 617047491,
+      "end": 617054019,
+      "ms": 0.006528,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 618127894,
+      "end": 618613525,
+      "ms": 0.485631,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 618168770,
+      "end": 618656866,
+      "ms": 0.488096,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 618728981,
+      "end": 618776052,
+      "ms": 0.047071,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 618770914,
+      "end": 618777506,
+      "ms": 0.006592,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 619851313,
+      "end": 620336912,
+      "ms": 0.485599,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 619892354,
+      "end": 620380834,
+      "ms": 0.48848,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 620450415,
+      "end": 620501167,
+      "ms": 0.050752,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 620496354,
+      "end": 620502722,
+      "ms": 0.006368,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 621531308,
+      "end": 621539756,
+      "ms": 0.008448,
+      "correlationId": 2791,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 621531585,
+      "end": 621539937,
+      "ms": 0.008352,
+      "correlationId": 2804,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 621940257,
+      "end": 621946145,
+      "ms": 0.005888,
+      "correlationId": 2870,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 621940395,
+      "end": 621945451,
+      "ms": 0.005056,
+      "correlationId": 2857,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 627403263,
+      "end": 743596119,
+      "ms": 116.192856,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 743241815,
+      "end": 743554295,
+      "ms": 0.31248,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 743670870,
+      "end": 743716310,
+      "ms": 0.04544,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 743711287,
+      "end": 743718807,
+      "ms": 0.00752,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 744697398,
+      "end": 744829462,
+      "ms": 0.132064,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 744700051,
+      "end": 744792179,
+      "ms": 0.092128,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 745921711,
+      "end": 746442382,
+      "ms": 0.520671,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 745994806,
+      "end": 746483510,
+      "ms": 0.488704,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 746557549,
+      "end": 746604269,
+      "ms": 0.04672,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 746598838,
+      "end": 746606390,
+      "ms": 0.007552,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 747678890,
+      "end": 748164392,
+      "ms": 0.485502,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 747718069,
+      "end": 748207125,
+      "ms": 0.489056,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 748280968,
+      "end": 748328168,
+      "ms": 0.0472,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 748322229,
+      "end": 748329781,
+      "ms": 0.007552,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 749402309,
+      "end": 749890883,
+      "ms": 0.488574,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 749443509,
+      "end": 749931700,
+      "ms": 0.488191,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 750006403,
+      "end": 750051363,
+      "ms": 0.04496,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 750045748,
+      "end": 750053524,
+      "ms": 0.007776,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 751121567,
+      "end": 751613374,
+      "ms": 0.491807,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 751165876,
+      "end": 751655252,
+      "ms": 0.489376,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 751729758,
+      "end": 751775229,
+      "ms": 0.045471,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 751770004,
+      "end": 751777524,
+      "ms": 0.00752,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 752755834,
+      "end": 752856026,
+      "ms": 0.100192,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 752758291,
+      "end": 752894547,
+      "ms": 0.136256,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 753983639,
+      "end": 754509621,
+      "ms": 0.525982,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 754061907,
+      "end": 754550643,
+      "ms": 0.488736,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 754624725,
+      "end": 754670837,
+      "ms": 0.046112,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 754665907,
+      "end": 754672467,
+      "ms": 0.00656,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 755743985,
+      "end": 756236464,
+      "ms": 0.492479,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 755790354,
+      "end": 756279026,
+      "ms": 0.488672,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 756352111,
+      "end": 756400175,
+      "ms": 0.048064,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 756394386,
+      "end": 756402514,
+      "ms": 0.008128,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 757471596,
+      "end": 757965162,
+      "ms": 0.493566,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 757519794,
+      "end": 758007410,
+      "ms": 0.487616,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 758079882,
+      "end": 758128458,
+      "ms": 0.048576,
+      "correlationId": 3659,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 758122930,
+      "end": 758129522,
+      "ms": 0.006592,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 758975953,
+      "end": 759621617,
+      "ms": 0.645664,
+      "correlationId": 3789,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 759612869,
+      "end": 759621061,
+      "ms": 0.008192,
+      "correlationId": 3709,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 759933489,
+      "end": 760037617,
+      "ms": 0.104128,
+      "correlationId": 3905,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 760031460,
+      "end": 760036516,
+      "ms": 0.005056,
+      "correlationId": 3775,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 764574127,
+      "end": 880491143,
+      "ms": 115.917016,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 880136020,
+      "end": 880450931,
+      "ms": 0.314911,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 880566963,
+      "end": 880611635,
+      "ms": 0.044672,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 880606535,
+      "end": 880613927,
+      "ms": 0.007392,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 881590630,
+      "end": 881724486,
+      "ms": 0.133856,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 881595152,
+      "end": 881686544,
+      "ms": 0.091392,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 882818828,
+      "end": 883339755,
+      "ms": 0.520927,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 882894246,
+      "end": 883381990,
+      "ms": 0.487744,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 883455722,
+      "end": 883501514,
+      "ms": 0.045792,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 883496422,
+      "end": 883503014,
+      "ms": 0.006592,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 884577031,
+      "end": 885065221,
+      "ms": 0.48819,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 884618629,
+      "end": 885106949,
+      "ms": 0.48832,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 885181189,
+      "end": 885228549,
+      "ms": 0.04736,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 885222789,
+      "end": 885230629,
+      "ms": 0.00784,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 886306626,
+      "end": 886787328,
+      "ms": 0.480702,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 886342149,
+      "end": 886830341,
+      "ms": 0.488192,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 886902624,
+      "end": 886952064,
+      "ms": 0.04944,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 886946149,
+      "end": 886953765,
+      "ms": 0.007616,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 888024828,
+      "end": 888515515,
+      "ms": 0.490687,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 888067620,
+      "end": 888556644,
+      "ms": 0.489024,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 888630970,
+      "end": 888677146,
+      "ms": 0.046176,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 888671748,
+      "end": 888679268,
+      "ms": 0.00752,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 889657860,
+      "end": 889792708,
+      "ms": 0.134848,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 889658071,
+      "end": 889755255,
+      "ms": 0.097184,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 890881908,
+      "end": 891409458,
+      "ms": 0.52755,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 890961379,
+      "end": 891451139,
+      "ms": 0.48976,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 891524786,
+      "end": 891571025,
+      "ms": 0.046239,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 891565571,
+      "end": 891572899,
+      "ms": 0.007328,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 892644014,
+      "end": 893133613,
+      "ms": 0.489599,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 892687843,
+      "end": 893174946,
+      "ms": 0.487103,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 893250316,
+      "end": 893295372,
+      "ms": 0.045056,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 893289986,
+      "end": 893297282,
+      "ms": 0.007296,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 894367593,
+      "end": 894861767,
+      "ms": 0.494174,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 894413282,
+      "end": 894902914,
+      "ms": 0.489632,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 894977703,
+      "end": 895024263,
+      "ms": 0.04656,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 895019394,
+      "end": 895025858,
+      "ms": 0.006464,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 896114689,
+      "end": 896217121,
+      "ms": 0.102432,
+      "correlationId": 4761,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 896208675,
+      "end": 896216931,
+      "ms": 0.008256,
+      "correlationId": 4627,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 896455905,
+      "end": 896682657,
+      "ms": 0.226752,
+      "correlationId": 4834,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 896676546,
+      "end": 896681858,
+      "ms": 0.005312,
+      "correlationId": 4693,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 900962624,
+      "end": 982305987,
+      "ms": 81.343363,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 981948957,
+      "end": 982266204,
+      "ms": 0.317247,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 982382043,
+      "end": 982426459,
+      "ms": 0.044416,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 982421827,
+      "end": 982428259,
+      "ms": 0.006432,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 983406051,
+      "end": 983539523,
+      "ms": 0.133472,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 983408056,
+      "end": 983501592,
+      "ms": 0.093536,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 984629717,
+      "end": 985159571,
+      "ms": 0.529854,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 984710626,
+      "end": 985200834,
+      "ms": 0.490208,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 985274803,
+      "end": 985319858,
+      "ms": 0.045055,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 985314754,
+      "end": 985321314,
+      "ms": 0.00656,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 986396207,
+      "end": 986882062,
+      "ms": 0.485855,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 986435938,
+      "end": 986923906,
+      "ms": 0.487968,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 986997133,
+      "end": 987045805,
+      "ms": 0.048672,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 987040130,
+      "end": 987047778,
+      "ms": 0.007648,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 988116554,
+      "end": 988604712,
+      "ms": 0.488158,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 988158433,
+      "end": 988646497,
+      "ms": 0.488064,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 988719656,
+      "end": 988766760,
+      "ms": 0.047104,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 988761409,
+      "end": 988769025,
+      "ms": 0.007616,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 989837861,
+      "end": 990328483,
+      "ms": 0.490622,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 989880673,
+      "end": 990369408,
+      "ms": 0.488735,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 990443907,
+      "end": 990490435,
+      "ms": 0.046528,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 990484800,
+      "end": 990492256,
+      "ms": 0.007456,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 991471040,
+      "end": 996791518,
+      "ms": 5.320478,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 996690736,
+      "end": 996753519,
+      "ms": 0.062783,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 997887340,
+      "end": 998407338,
+      "ms": 0.519998,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 997959006,
+      "end": 998448542,
+      "ms": 0.489536,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 998523306,
+      "end": 998568682,
+      "ms": 0.045376,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 998563166,
+      "end": 998570622,
+      "ms": 0.007456,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 999640583,
+      "end": 1000131173,
+      "ms": 0.49059,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 999684573,
+      "end": 1000173821,
+      "ms": 0.489248,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1000246661,
+      "end": 1000293989,
+      "ms": 0.047328,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1000288573,
+      "end": 1000295869,
+      "ms": 0.007296,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1001367969,
+      "end": 1001859040,
+      "ms": 0.491071,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1001413981,
+      "end": 1001901948,
+      "ms": 0.487967,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1001973151,
+      "end": 1002021983,
+      "ms": 0.048832,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1002017116,
+      "end": 1002023548,
+      "ms": 0.006432,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1002826941,
+      "end": 1002935581,
+      "ms": 0.10864,
+      "correlationId": 5546,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1002928412,
+      "end": 1002936700,
+      "ms": 0.008288,
+      "correlationId": 5630,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1003139740,
+      "end": 1003382939,
+      "ms": 0.243199,
+      "correlationId": 5612,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1003375676,
+      "end": 1003383964,
+      "ms": 0.008288,
+      "correlationId": 5765,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1008108954,
+      "end": 1102176697,
+      "ms": 94.067743,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1101820014,
+      "end": 1102135917,
+      "ms": 0.315903,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1102251053,
+      "end": 1102297612,
+      "ms": 0.046559,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1102292217,
+      "end": 1102299673,
+      "ms": 0.007456,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1103278521,
+      "end": 1103414009,
+      "ms": 0.135488,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1103284297,
+      "end": 1103376009,
+      "ms": 0.091712,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1104503942,
+      "end": 1105030660,
+      "ms": 0.526718,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1104582105,
+      "end": 1105070840,
+      "ms": 0.488735,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1105145956,
+      "end": 1105191460,
+      "ms": 0.045504,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1105186072,
+      "end": 1105193688,
+      "ms": 0.007616,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1106265344,
+      "end": 1106751487,
+      "ms": 0.486143,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1106305496,
+      "end": 1106793688,
+      "ms": 0.488192,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1106867230,
+      "end": 1106914846,
+      "ms": 0.047616,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1106909496,
+      "end": 1106916280,
+      "ms": 0.006784,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1107987675,
+      "end": 1108475193,
+      "ms": 0.487518,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1108030903,
+      "end": 1108519319,
+      "ms": 0.488416,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1108589625,
+      "end": 1108640441,
+      "ms": 0.050816,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1108634903,
+      "end": 1108642423,
+      "ms": 0.00752,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1109712950,
+      "end": 1110200948,
+      "ms": 0.487998,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1109757239,
+      "end": 1110245271,
+      "ms": 0.488032,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1110315220,
+      "end": 1110367700,
+      "ms": 0.05248,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1110361367,
+      "end": 1110369239,
+      "ms": 0.007872,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1111346353,
+      "end": 1111444976,
+      "ms": 0.098623,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1111347478,
+      "end": 1111483318,
+      "ms": 0.13584,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1112569933,
+      "end": 1113097771,
+      "ms": 0.527838,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1112653238,
+      "end": 1113141398,
+      "ms": 0.48816,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1113257238,
+      "end": 1116407028,
+      "ms": 3.14979,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1116400033,
+      "end": 1116406049,
+      "ms": 0.006016,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1117479902,
+      "end": 1117970556,
+      "ms": 0.490654,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1117521364,
+      "end": 1118010900,
+      "ms": 0.489536,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1118085244,
+      "end": 1118131036,
+      "ms": 0.045792,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1118125332,
+      "end": 1118132628,
+      "ms": 0.007296,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1119206393,
+      "end": 1119691831,
+      "ms": 0.485438,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1119244595,
+      "end": 1119733395,
+      "ms": 0.4888,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1119807511,
+      "end": 1119853719,
+      "ms": 0.046208,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1119848723,
+      "end": 1119855187,
+      "ms": 0.006464,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1120758804,
+      "end": 1121044243,
+      "ms": 0.285439,
+      "correlationId": 6463,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1121033939,
+      "end": 1121045555,
+      "ms": 0.011616,
+      "correlationId": 6624,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1121245266,
+      "end": 1121262386,
+      "ms": 0.01712,
+      "correlationId": 6529,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1121256819,
+      "end": 1121263379,
+      "ms": 0.00656,
+      "correlationId": 6694,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1125539153,
+      "end": 1195111321,
+      "ms": 69.572168,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1194753841,
+      "end": 1195071568,
+      "ms": 0.317727,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1195186960,
+      "end": 1195232080,
+      "ms": 0.04512,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1195227385,
+      "end": 1195233689,
+      "ms": 0.006304,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1196211449,
+      "end": 1196346969,
+      "ms": 0.13552,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1196216109,
+      "end": 1196305645,
+      "ms": 0.089536,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1197435849,
+      "end": 1197959272,
+      "ms": 0.523423,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1197515192,
+      "end": 1198003128,
+      "ms": 0.487936,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1198074663,
+      "end": 1198122279,
+      "ms": 0.047616,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1198117272,
+      "end": 1198123704,
+      "ms": 0.006432,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1199194084,
+      "end": 1199686530,
+      "ms": 0.492446,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1199238423,
+      "end": 1199728247,
+      "ms": 0.489824,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1199802146,
+      "end": 1199847906,
+      "ms": 0.04576,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1199842743,
+      "end": 1199849367,
+      "ms": 0.006624,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1200925470,
+      "end": 1201411101,
+      "ms": 0.485631,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1200964887,
+      "end": 1201452983,
+      "ms": 0.488096,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1201527613,
+      "end": 1201574876,
+      "ms": 0.047263,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1201569015,
+      "end": 1201577143,
+      "ms": 0.008128,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1202647865,
+      "end": 1203138040,
+      "ms": 0.490175,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1202692374,
+      "end": 1203180406,
+      "ms": 0.488032,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1203252119,
+      "end": 1203301943,
+      "ms": 0.049824,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1203296502,
+      "end": 1203303862,
+      "ms": 0.00736,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1204282742,
+      "end": 1209974804,
+      "ms": 5.692062,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1209873187,
+      "end": 1209936803,
+      "ms": 0.063616,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1211065087,
+      "end": 1211590110,
+      "ms": 0.525023,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1211144627,
+      "end": 1211633555,
+      "ms": 0.488928,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1211705053,
+      "end": 1211754045,
+      "ms": 0.048992,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1211748787,
+      "end": 1211756211,
+      "ms": 0.007424,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1212828442,
+      "end": 1213313049,
+      "ms": 0.484607,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1212867955,
+      "end": 1213355027,
+      "ms": 0.487072,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1213428472,
+      "end": 1213475096,
+      "ms": 0.046624,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1213469939,
+      "end": 1213476371,
+      "ms": 0.006432,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1214545621,
+      "end": 1215037139,
+      "ms": 0.491518,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1214592274,
+      "end": 1215080114,
+      "ms": 0.48784,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1215152851,
+      "end": 1215200147,
+      "ms": 0.047296,
+      "correlationId": 7332,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1215195474,
+      "end": 1215201106,
+      "ms": 0.005632,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1216075504,
+      "end": 1216190736,
+      "ms": 0.115232,
+      "correlationId": 7382,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1216183186,
+      "end": 1216191474,
+      "ms": 0.008288,
+      "correlationId": 7531,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1216520463,
+      "end": 1216549839,
+      "ms": 0.029376,
+      "correlationId": 7448,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1216543921,
+      "end": 1216550353,
+      "ms": 0.006432,
+      "correlationId": 7623,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1220919632,
+      "end": 1296736437,
+      "ms": 75.816805,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1296380474,
+      "end": 1296695225,
+      "ms": 0.314751,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1296811449,
+      "end": 1296856633,
+      "ms": 0.045184,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1296851189,
+      "end": 1296858741,
+      "ms": 0.007552,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1297837269,
+      "end": 1297972853,
+      "ms": 0.135584,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1297837654,
+      "end": 1297935414,
+      "ms": 0.09776,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1299063474,
+      "end": 1299588656,
+      "ms": 0.525182,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1299141877,
+      "end": 1299630420,
+      "ms": 0.488543,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1299703312,
+      "end": 1299751920,
+      "ms": 0.048608,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1299746036,
+      "end": 1299753716,
+      "ms": 0.00768,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1300827597,
+      "end": 1301316939,
+      "ms": 0.489342,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1300869524,
+      "end": 1301358036,
+      "ms": 0.488512,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1301432843,
+      "end": 1301478635,
+      "ms": 0.045792,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1301473524,
+      "end": 1301480116,
+      "ms": 0.006592,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1302556295,
+      "end": 1303039750,
+      "ms": 0.483455,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1302594931,
+      "end": 1303082547,
+      "ms": 0.487616,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1303154246,
+      "end": 1303204645,
+      "ms": 0.050399,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1303198899,
+      "end": 1303206355,
+      "ms": 0.007456,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1304276578,
+      "end": 1304769953,
+      "ms": 0.493375,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1304321267,
+      "end": 1304810547,
+      "ms": 0.48928,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1304885056,
+      "end": 1304930656,
+      "ms": 0.0456,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1304925395,
+      "end": 1304932083,
+      "ms": 0.006688,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1305911741,
+      "end": 1306010909,
+      "ms": 0.099168,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1305913714,
+      "end": 1306048082,
+      "ms": 0.134368,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1307137657,
+      "end": 1307660952,
+      "ms": 0.523295,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1307215250,
+      "end": 1307703794,
+      "ms": 0.488544,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1307776439,
+      "end": 1307824823,
+      "ms": 0.048384,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1307819218,
+      "end": 1307826866,
+      "ms": 0.007648,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1308897908,
+      "end": 1309388754,
+      "ms": 0.490846,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1308943697,
+      "end": 1309431729,
+      "ms": 0.488032,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1309546673,
+      "end": 1311880560,
+      "ms": 2.333887,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1311874123,
+      "end": 1311880075,
+      "ms": 0.005952,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1312954728,
+      "end": 1313440070,
+      "ms": 0.485342,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1312992656,
+      "end": 1313481744,
+      "ms": 0.489088,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1313555910,
+      "end": 1313602214,
+      "ms": 0.046304,
+      "correlationId": 8249,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1313597616,
+      "end": 1313603152,
+      "ms": 0.005536,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1314433539,
+      "end": 1314589699,
+      "ms": 0.15616,
+      "correlationId": 8299,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1314582543,
+      "end": 1314590735,
+      "ms": 0.008192,
+      "correlationId": 8420,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1314829410,
+      "end": 1315002945,
+      "ms": 0.173535,
+      "correlationId": 8365,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1314995759,
+      "end": 1315003951,
+      "ms": 0.008192,
+      "correlationId": 8554,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1319347310,
+      "end": 1393054164,
+      "ms": 73.706854,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1392698483,
+      "end": 1393014674,
+      "ms": 0.316191,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1393131826,
+      "end": 1393174450,
+      "ms": 0.042624,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1393168724,
+      "end": 1393176852,
+      "ms": 0.008128,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1394154675,
+      "end": 1394287795,
+      "ms": 0.13312,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1394156911,
+      "end": 1394250895,
+      "ms": 0.093984,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1395378411,
+      "end": 1395896522,
+      "ms": 0.518111,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1395454323,
+      "end": 1395939827,
+      "ms": 0.485504,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1396011273,
+      "end": 1396059593,
+      "ms": 0.04832,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1396054355,
+      "end": 1396061523,
+      "ms": 0.007168,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1397135590,
+      "end": 1397619460,
+      "ms": 0.48387,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1397176690,
+      "end": 1397663090,
+      "ms": 0.4864,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1397734756,
+      "end": 1397784580,
+      "ms": 0.049824,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1397778674,
+      "end": 1397786386,
+      "ms": 0.007712,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1398857921,
+      "end": 1399347135,
+      "ms": 0.489214,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1398899922,
+      "end": 1399389522,
+      "ms": 0.4896,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1399462271,
+      "end": 1399510047,
+      "ms": 0.047776,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1399504178,
+      "end": 1399511570,
+      "ms": 0.007392,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1400582491,
+      "end": 1401075642,
+      "ms": 0.493151,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1400627505,
+      "end": 1401119601,
+      "ms": 0.492096,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1401190681,
+      "end": 1401240793,
+      "ms": 0.050112,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1401235633,
+      "end": 1401242545,
+      "ms": 0.006912,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1402217782,
+      "end": 1402323670,
+      "ms": 0.105888,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1402221745,
+      "end": 1402361937,
+      "ms": 0.140192,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1403451731,
+      "end": 1403976273,
+      "ms": 0.524542,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1403532656,
+      "end": 1404020048,
+      "ms": 0.487392,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1404090673,
+      "end": 1404140624,
+      "ms": 0.049951,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1404134736,
+      "end": 1404142224,
+      "ms": 0.007488,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1405209933,
+      "end": 1405703564,
+      "ms": 0.493631,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1405256016,
+      "end": 1405745615,
+      "ms": 0.489599,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1405818155,
+      "end": 1405867915,
+      "ms": 0.04976,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1405862063,
+      "end": 1405869839,
+      "ms": 0.007776,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1406943528,
+      "end": 1407425350,
+      "ms": 0.481822,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1406981455,
+      "end": 1407469999,
+      "ms": 0.488544,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1407539558,
+      "end": 1407590118,
+      "ms": 0.05056,
+      "correlationId": 9166,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1407585487,
+      "end": 1407591055,
+      "ms": 0.005568,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    }
+  ],
+  "long_kernels": [
+    {
+      "deviceId": 1,
+      "start": 627403263,
+      "end": 743596119,
+      "ms": 116.192856,
+      "correlationId": 3665,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 764574127,
+      "end": 880491143,
+      "ms": 115.917016,
+      "correlationId": 4594,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1008108954,
+      "end": 1102176697,
+      "ms": 94.067743,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 900962624,
+      "end": 982305987,
+      "ms": 81.343363,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1220919632,
+      "end": 1296736437,
+      "ms": 75.816805,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1319347310,
+      "end": 1393054164,
+      "ms": 73.706854,
+      "correlationId": 9243,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 432302659,
+      "end": 505001546,
+      "ms": 72.698887,
+      "correlationId": 1823,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 529474049,
+      "end": 600157737,
+      "ms": 70.683688,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1125539153,
+      "end": 1195111321,
+      "ms": 69.572168,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 288722407,
+      "end": 312580158,
+      "ms": 23.857751,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 312696189,
+      "end": 331138085,
+      "ms": 18.441896,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 273404822,
+      "end": 280228449,
+      "ms": 6.823627,
+      "correlationId": 110,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 608349638,
+      "end": 614160452,
+      "ms": 5.810814,
+      "correlationId": 2734,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1204282742,
+      "end": 1209974804,
+      "ms": 5.692062,
+      "correlationId": 7383,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 991471040,
+      "end": 996791518,
+      "ms": 5.320478,
+      "correlationId": 5523,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1113257238,
+      "end": 1116407028,
+      "ms": 3.14979,
+      "correlationId": 6454,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 332118562,
+      "end": 335120089,
+      "ms": 3.001527,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 1309546673,
+      "end": 1311880560,
+      "ms": 2.333887,
+      "correlationId": 8312,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 336890227,
+      "end": 337929904,
+      "ms": 1.039677,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 345688376,
+      "end": 346630390,
+      "ms": 0.942014,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 339602827,
+      "end": 340460584,
+      "ms": 0.857757,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 280429152,
+      "end": 281243326,
+      "ms": 0.814174,
+      "correlationId": 196,
+      "name": "ncclDevKernel_AllReduce_Sum_f64_TREE_LL"
+    },
+    {
+      "deviceId": 1,
+      "start": 758975953,
+      "end": 759621617,
+      "ms": 0.645664,
+      "correlationId": 3789,
+      "name": "ncclDevKernel_AllReduce_Sum_u32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 348393776,
+      "end": 348990990,
+      "ms": 0.597214,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 342130019,
+      "end": 342674850,
+      "ms": 0.544831,
+      "correlationId": 885,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_RING_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 984629717,
+      "end": 985159571,
+      "ms": 0.529854,
+      "correlationId": 5496,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1112569933,
+      "end": 1113097771,
+      "ms": 0.527838,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 890881908,
+      "end": 891409458,
+      "ms": 0.52755,
+      "correlationId": 4577,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 1104503942,
+      "end": 1105030660,
+      "ms": 0.526718,
+      "correlationId": 6413,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    },
+    {
+      "deviceId": 0,
+      "start": 602480390,
+      "end": 603006949,
+      "ms": 0.526559,
+      "correlationId": 2741,
+      "name": "ncclDevKernel_AllReduce_Sum_f32_TREE_LL"
+    }
+  ],
+  "CUPTI_ACTIVITY_KIND_RUNTIME": [
+    {
+      "name": "cudaMemcpyAsync_v3020",
+      "calls": 203,
+      "mean_ms": 5.714414330049261,
+      "max_ms": 124.97556
+    },
+    {
+      "name": "cudaGraphLaunch_v10000",
+      "calls": 20,
+      "mean_ms": 15.1928127,
+      "max_ms": 61.368264
+    },
+    {
+      "name": "cudaProfilerStop_v4000",
+      "calls": 1,
+      "mean_ms": 49.664035,
+      "max_ms": 49.664035
+    },
+    {
+      "name": "cudaLaunchKernel_v7000",
+      "calls": 782,
+      "mean_ms": 0.012182870843989769,
+      "max_ms": 0.099472
+    },
+    {
+      "name": "cudaStreamSynchronize_v3020",
+      "calls": 201,
+      "mean_ms": 0.04592246268656717,
+      "max_ms": 6.726823
+    },
+    {
+      "name": "cuLaunchKernelEx",
+      "calls": 41,
+      "mean_ms": 0.02255960975609756,
+      "max_ms": 0.053455
+    },
+    {
+      "name": "cudaEventQuery_v3020",
+      "calls": 293,
+      "mean_ms": 0.002801034129692833,
+      "max_ms": 0.084898
+    },
+    {
+      "name": "cudaEventRecordWithFlags_v11010",
+      "calls": 123,
+      "mean_ms": 0.005411398373983739,
+      "max_ms": 0.020631
+    },
+    {
+      "name": "cuLaunchKernel",
+      "calls": 60,
+      "mean_ms": 0.009502833333333334,
+      "max_ms": 0.051796
+    },
+    {
+      "name": "cudaStreamIsCapturing_v10000",
+      "calls": 387,
+      "mean_ms": 0.0012607881136950906,
+      "max_ms": 0.008838
+    },
+    {
+      "name": "cudaEventRecord_v3020",
+      "calls": 164,
+      "mean_ms": 0.0026199634146341464,
+      "max_ms": 0.083602
+    },
+    {
+      "name": "cudaLaunchKernelExC_v11060",
+      "calls": 40,
+      "mean_ms": 0.010255,
+      "max_ms": 0.043971
+    },
+    {
+      "name": "cudaStreamWaitEvent_v3020",
+      "calls": 143,
+      "mean_ms": 0.0027244335664335663,
+      "max_ms": 0.015737
+    },
+    {
+      "name": "cudaMemsetAsync_v3020",
+      "calls": 40,
+      "mean_ms": 0.008045125,
+      "max_ms": 0.037412
+    },
+    {
+      "name": "cuKernelGetName",
+      "calls": 782,
+      "mean_ms": 0.00036967135549872125,
+      "max_ms": 0.008754
+    },
+    {
+      "name": "cudaEventSynchronize_v3020",
+      "calls": 3,
+      "mean_ms": 0.07012733333333333,
+      "max_ms": 0.084304
+    },
+    {
+      "name": "cudaEventCreateWithFlags_v3020",
+      "calls": 62,
+      "mean_ms": 0.0031290645161290323,
+      "max_ms": 0.010071
+    },
+    {
+      "name": "cudaStreamGetCaptureInfo_v12030",
+      "calls": 185,
+      "mean_ms": 0.0010021081081081082,
+      "max_ms": 0.003681
+    },
+    {
+      "name": "cudaGetFuncBySymbol_v11000",
+      "calls": 41,
+      "mean_ms": 0.004365292682926829,
+      "max_ms": 0.014856
+    },
+    {
+      "name": "cudaEventDestroy_v3020",
+      "calls": 62,
+      "mean_ms": 0.002735467741935484,
+      "max_ms": 0.046878
+    }
+  ]
+}

@@ -1,0 +1,630 @@
+diff --git a/src/uni_rl/algos/fast_sac/learner.py b/src/uni_rl/algos/fast_sac/learner.py
+index e0debb5..fb50b22 100644
+--- a/src/uni_rl/algos/fast_sac/learner.py
++++ b/src/uni_rl/algos/fast_sac/learner.py
+@@ -459,6 +459,11 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             device_gated=self._device_type == "cuda" and self.use_compile,
+         )
+         self._gradient_sync: Callable[[Iterable[torch.Tensor]], None] | None = None
++        self._gradient_graph_hooks: tuple[Callable[[], None], ...] | None = None
++        self._gradient_loss_flag = torch.empty(
++            (), device=device, dtype=torch.float32, requires_grad=True
++        )
++        self._gradient_loss_flag.grad = torch.zeros_like(self._gradient_loss_flag)
+         self.nvtx_profile_ranges = bool(nvtx_profile_ranges) and self._device_type == "cuda"
+         self.amp_dtype = amp_dtype
+         self._amp_dtype = self._resolve_amp_dtype(amp_dtype, self._device_type)
+@@ -654,11 +659,49 @@ class FastSACLearner(LearnerBoilerplateMixin):
+                 torch.cuda.synchronize(self.device)
+ 
+     def set_gradient_sync(self, sync: Callable[[Iterable[torch.Tensor]], None] | None) -> None:
+-        """Attach the compatibility-device DP reduction."""
+-        if sync is not None and self._compile_full_update_cycle:
+-            raise RuntimeError("FastSAC NVIDIA CUDA whole-cycle mode does not support DP fallback")
++        """Attach gradient averaging at each optimizer boundary.
++
++        CUDA callers must supply a capture-safe collective and execute the same
++        update schedule on every rank. Changing the callback invalidates the
++        captured graph, whose communication nodes otherwise retain the old sync.
++        """
++        if sync != self._gradient_sync:
++            self._reset_update_cycle_graph()
++            self._gradient_graph_hooks = None
+         self._gradient_sync = sync
+ 
++    def set_gradient_graph_hooks(
++        self,
++        begin_capture: Callable[[], None],
++        end_capture: Callable[[], None],
++        before_replay: Callable[[], None],
++    ) -> None:
++        """Register instrumentation at the actual graph lifecycle boundaries."""
++        hooks = (begin_capture, end_capture, before_replay)
++        if hooks != self._gradient_graph_hooks:
++            self._reset_update_cycle_graph()
++        self._gradient_graph_hooks = hooks
++
++    def _sync_loss_gradients(self, parameters: Iterable[torch.Tensor], loss: torch.Tensor) -> None:
++        """Piggyback loss validity on the existing CUDA gradient collective.
++
++        The sentinel is not an optimizer parameter or checkpoint field. Its
++        stable gradient address is reused by graph replay. Compatibility and
++        GradScaler paths retain their existing synchronization behavior.
++        """
++        if (
++            self._gradient_sync is None
++            or self._device_type != "cuda"
++            or self._host_finite_checks
++            or self.scaler is not None
++        ):
++            self._sync_gradients(parameters)
++            return
++        sentinel = self._gradient_loss_flag
++        assert sentinel.grad is not None
++        sentinel.grad.copy_(torch.logical_not(torch.isfinite(loss.detach()).all()))
++        self._sync_gradients((*parameters, sentinel))
++
+     def normalize_obs(self, obs: torch.Tensor, update: bool = False) -> torch.Tensor:
+         """Normalize actor observations using running statistics."""
+         if isinstance(self.obs_normalizer, nn.Identity):
+@@ -684,8 +727,12 @@ class FastSACLearner(LearnerBoilerplateMixin):
+         if self._host_finite_checks or self._device_type != "cuda":
+             return
+         found_inf = self._optimizer_found_inf
+-        found_inf.copy_(torch.logical_not(torch.isfinite(loss.detach()).all()))
+         if self._gradient_sync is not None:
++            assert self._gradient_loss_flag.grad is not None
++            if self.scaler is None:
++                found_inf.copy_(self._gradient_loss_flag.grad > 0)
++            else:
++                found_inf.copy_(torch.logical_not(torch.isfinite(loss.detach()).all()))
+             gradients = [
+                 parameter.grad
+                 for group in optimizer.param_groups
+@@ -700,8 +747,10 @@ class FastSACLearner(LearnerBoilerplateMixin):
+                 )
+             if optimizer is self.q_optimizer:
+                 self._q_update_finite.copy_(torch.logical_not(found_inf.detach()))
+-        elif optimizer is self.q_optimizer:
+-            self._q_update_finite.copy_(torch.isfinite(loss.detach().all()))
++        else:
++            found_inf.copy_(torch.logical_not(torch.isfinite(loss.detach()).all()))
++            if optimizer is self.q_optimizer:
++                self._q_update_finite.copy_(torch.logical_not(found_inf.detach()))
+         setattr(optimizer, "grad_scale", self._optimizer_grad_scale)
+         setattr(optimizer, "found_inf", found_inf)
+ 
+@@ -1063,24 +1112,31 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             key: value.detach().clone() for key, value in large_batch.items()
+         }
+         static_batch = self._update_cycle_static_batch
+-        self._warm_update_cycle_graph(
+-            static_batch,
+-            updates_per_step=updates_per_step,
+-            policy_frequency=policy_frequency,
+-            target_frequency=target_frequency,
+-            policy_before_critic=policy_before_critic,
+-        )
+-        graph = torch.cuda.CUDAGraph()
+-        with torch.cuda.device(self.device), torch.cuda.graph(graph):
+-            self._run_update_cycle_core(
++        hooks = self._gradient_graph_hooks
++        if hooks is not None:
++            hooks[0]()
++        try:
++            self._warm_update_cycle_graph(
+                 static_batch,
+                 updates_per_step=updates_per_step,
+                 policy_frequency=policy_frequency,
+                 target_frequency=target_frequency,
+                 policy_before_critic=policy_before_critic,
+             )
+-        self._update_cycle_graph = graph
+-        self._update_cycle_graph_metric_values = self._pending_cycle_metric_values
++            graph = torch.cuda.CUDAGraph()
++            with torch.cuda.device(self.device), torch.cuda.graph(graph):
++                self._run_update_cycle_core(
++                    static_batch,
++                    updates_per_step=updates_per_step,
++                    policy_frequency=policy_frequency,
++                    target_frequency=target_frequency,
++                    policy_before_critic=policy_before_critic,
++                )
++            self._update_cycle_graph = graph
++            self._update_cycle_graph_metric_values = self._pending_cycle_metric_values
++        finally:
++            if hooks is not None:
++                hooks[1]()
+ 
+     def update_cycle(
+         self,
+@@ -1107,6 +1163,8 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             policy_before_critic=policy_before_critic,
+         )
+         assert self._update_cycle_graph is not None
++        if self._gradient_graph_hooks is not None:
++            self._gradient_graph_hooks[2]()
+         self._update_cycle_graph.replay()
+         self._pending_cycle_metric_values = self._update_cycle_graph_metric_values
+ 
+@@ -1146,7 +1204,7 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             if self.scaler:
+                 with _cuda_nvtx_range("critic/backward", self.nvtx_profile_ranges):
+                     self.scaler.scale(qf_loss).backward()
+-                self._sync_gradients(self.qnet.parameters())
++                self._sync_loss_gradients(self.qnet.parameters(), qf_loss)
+                 self.scaler.unscale_(self.q_optimizer)
+                 if self.max_grad_norm > 0:
+                     with _cuda_nvtx_range("critic/grad_clip", self.nvtx_profile_ranges):
+@@ -1161,7 +1219,7 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             else:
+                 with _cuda_nvtx_range("critic/backward", self.nvtx_profile_ranges):
+                     qf_loss.backward()
+-                self._sync_gradients(self.qnet.parameters())
++                self._sync_loss_gradients(self.qnet.parameters(), qf_loss)
+                 if self.max_grad_norm > 0:
+                     with _cuda_nvtx_range("critic/grad_clip", self.nvtx_profile_ranges):
+                         critic_grad_norm = torch.nn.utils.clip_grad_norm_(
+@@ -1185,7 +1243,7 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             if self._finite_check_ok(alpha_loss, read_metrics):
+                 with _cuda_nvtx_range("critic/alpha_backward", self.nvtx_profile_ranges):
+                     alpha_loss.backward()
+-                self._sync_gradients((self.log_alpha,))
++                self._sync_loss_gradients((self.log_alpha,), alpha_loss)
+                 with _cuda_nvtx_range("critic/alpha_optimizer_step", self.nvtx_profile_ranges):
+                     self._arm_optimizer_finite_gate(self.alpha_optimizer, alpha_loss)
+                     self.alpha_optimizer.step()
+@@ -1245,7 +1303,7 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             if self.scaler:
+                 with _cuda_nvtx_range("actor/backward", self.nvtx_profile_ranges):
+                     self.scaler.scale(actor_loss).backward()
+-                self._sync_gradients(self.actor.parameters())
++                self._sync_loss_gradients(self.actor.parameters(), actor_loss)
+                 self.scaler.unscale_(self.actor_optimizer)
+                 if self.max_grad_norm > 0:
+                     with _cuda_nvtx_range("actor/grad_clip", self.nvtx_profile_ranges):
+@@ -1260,7 +1318,7 @@ class FastSACLearner(LearnerBoilerplateMixin):
+             else:
+                 with _cuda_nvtx_range("actor/backward", self.nvtx_profile_ranges):
+                     actor_loss.backward(inputs=list(self.actor.parameters()))
+-                self._sync_gradients(self.actor.parameters())
++                self._sync_loss_gradients(self.actor.parameters(), actor_loss)
+                 if self.max_grad_norm > 0:
+                     with _cuda_nvtx_range("actor/grad_clip", self.nvtx_profile_ranges):
+                         actor_grad_norm = torch.nn.utils.clip_grad_norm_(
+diff --git a/src/uni_rl/ipc/dp_sync.py b/src/uni_rl/ipc/dp_sync.py
+index 1cd7992..9386675 100644
+--- a/src/uni_rl/ipc/dp_sync.py
++++ b/src/uni_rl/ipc/dp_sync.py
+@@ -57,6 +57,11 @@ class DpParameterSync:
+         self._statistics_schema: dict[str, str] = {}
+         self._gradient_sync_time_sec = 0.0
+         self._gradient_sync_calls = 0
++        self._capturing_gradient_graph = False
++        self._gradient_graph_events: list[tuple[torch.cuda.Event, torch.cuda.Event]] = []
++        self._gradient_graph_calls = 0
++        self._gradient_graph_timing_enabled = True
++        self._gradient_graph_pending = False
+         self._gradient_buffers: dict[tuple[int, ...], torch.Tensor] = {}
+         self._started = False
+ 
+@@ -110,6 +115,16 @@ class DpParameterSync:
+         gradient layout.
+         """
+         sync_start = time.perf_counter()
++        timing_events = None
++        capturing = self._capturing_gradient_graph and torch.cuda.is_current_stream_capturing()
++        if capturing:
++            self._gradient_graph_calls += 1
++        if capturing and self._gradient_graph_timing_enabled:
++            timing_events = (
++                torch.cuda.Event(enable_timing=True, external=True),
++                torch.cuda.Event(enable_timing=True, external=True),
++            )
++            timing_events[0].record()
+         params = [
+             parameter
+             for parameter in parameters
+@@ -156,11 +171,57 @@ class DpParameterSync:
+             gradient.copy_(packed[offset : offset + width].view_as(parameter))
+             offset += width
+ 
+-        self._gradient_sync_time_sec += time.perf_counter() - sync_start
+-        self._gradient_sync_calls += 1
++        if timing_events is not None:
++            timing_events[1].record()
++            self._gradient_graph_events.append(timing_events)
++        elif not capturing:
++            self._gradient_sync_time_sec += time.perf_counter() - sync_start
++            self._gradient_sync_calls += 1
++
++    def begin_gradient_graph_capture(self, *, enable_timing: bool = True) -> None:
++        """Start a new CUDA graph's synchronization instrumentation.
++
++        Call outside CUDA capture, around warmup and capture. Warmup metrics
++        are discarded; only operations inside CUDA capture create events.
++        The owner must release the previous graph before replacing its events.
++        """
++        self._consume_gradient_graph_timing()
++        self._gradient_sync_time_sec = 0.0
++        self._gradient_sync_calls = 0
++        self._gradient_graph_events.clear()
++        self._gradient_graph_calls = 0
++        self._gradient_graph_timing_enabled = enable_timing
++        self._capturing_gradient_graph = True
++
++    def end_gradient_graph_capture(self) -> None:
++        """Finish instrumentation, including when capture raises."""
++        self._capturing_gradient_graph = False
++        self._gradient_sync_time_sec = 0.0
++        self._gradient_sync_calls = 0
++
++    def record_gradient_graph_replay(self) -> None:
++        """Account for one replay; call immediately BEFORE graph.replay().
++
++        Consume an uncollected previous replay before its events are overwritten.
++        Normally the runner already consumed it at its iteration metrics boundary.
++        GPU time includes packing, collective dependencies, averaging and unpacking;
++        it is not an isolated wire-transfer measurement.
++        """
++        self._consume_gradient_graph_timing()
++        self._gradient_sync_calls += self._gradient_graph_calls
++        self._gradient_graph_pending = bool(self._gradient_graph_events)
++
++    def _consume_gradient_graph_timing(self) -> None:
++        if not self._gradient_graph_pending:
++            return
++        for start, end in self._gradient_graph_events:
++            end.synchronize()
++            self._gradient_sync_time_sec += start.elapsed_time(end) / 1000.0
++        self._gradient_graph_pending = False
+ 
+     def take_gradient_sync_metrics(self) -> tuple[float, int]:
+         """Return and reset this rank's gradient-sync time and call count."""
++        self._consume_gradient_graph_timing()
+         metrics = (self._gradient_sync_time_sec, self._gradient_sync_calls)
+         self._gradient_sync_time_sec = 0.0
+         self._gradient_sync_calls = 0
+@@ -222,12 +283,16 @@ class DpParameterSync:
+ 
+         keys = tuple(sorted(self._statistics_schema))
+         values = mean | total
+-        packed = torch.zeros((2, len(keys)), dtype=torch.float64, device=device)
+-        for index, key in enumerate(keys):
+-            if key not in values:
+-                continue
+-            packed[0, index] = float(values[key])
+-            packed[1, index] = 1.0
++        # Materialize the entire payload on the host before one device transfer.
++        # Per-scalar CUDA assignments launch a copy for every value and mask.
++        packed = torch.tensor(
++            [
++                [float(values.get(key, 0.0)) for key in keys],
++                [float(key in values) for key in keys],
++            ],
++            dtype=torch.float64,
++            device=device,
++        )
+         dist.all_reduce(packed, op=dist.ReduceOp.SUM)
+ 
+         value_sums = packed[0].tolist()
+@@ -291,6 +356,9 @@ class DpParameterSync:
+         if dist.is_available() and dist.is_initialized():
+             dist.destroy_process_group()
+         self._gradient_buffers.clear()
++        self._gradient_graph_events.clear()
++        self._gradient_graph_pending = False
++        self._gradient_graph_calls = 0
+         self._started = False
+ 
+     def _ordered_keys(self, tensors: dict[str, torch.Tensor]) -> tuple[str, ...]:
+diff --git a/src/uni_rl/offpolicy/double_buffer_runner.py b/src/uni_rl/offpolicy/double_buffer_runner.py
+index bea18c4..ef3e730 100644
+--- a/src/uni_rl/offpolicy/double_buffer_runner.py
++++ b/src/uni_rl/offpolicy/double_buffer_runner.py
+@@ -11,6 +11,7 @@ from collections import defaultdict, deque
+ from collections.abc import Callable
+ from contextlib import nullcontext
+ from dataclasses import replace
++from functools import partial
+ from pathlib import Path
+ from typing import TYPE_CHECKING, Any, TypedDict, cast
+ 
+@@ -255,6 +256,16 @@ class DoubleBufferOffPolicyRunner(OffPolicyRunner):
+                 "for multi-GPU data parallelism"
+             )
+         setter(self.dp_sync.allreduce_gradients)
++        graph_hooks = getattr(self.learner, "set_gradient_graph_hooks", None)
++        if callable(graph_hooks):
++            graph_hooks(
++                begin_capture=partial(
++                    self.dp_sync.begin_gradient_graph_capture,
++                    enable_timing=self.trace_enabled and self.trace_cuda_events,
++                ),
++                end_capture=self.dp_sync.end_gradient_graph_capture,
++                before_replay=self.dp_sync.record_gradient_graph_replay,
++            )
+ 
+     def _cuda_graph_runtime_manifest(self) -> dict[str, object]:
+         """Describe the effective learner graph backend."""
+@@ -395,7 +406,9 @@ class DoubleBufferOffPolicyRunner(OffPolicyRunner):
+             return
+         sync_time, sync_calls = self.dp_sync.take_gradient_sync_metrics()
+         if sync_calls > 0:
+-            iter_metrics["Perf/dp_gradient_sync_ms_per_rank"].append(sync_time * 1000.0)
++            graph_mode = bool(getattr(self.learner, "use_update_cycle", False))
++            if not graph_mode or (self.trace_enabled and self.trace_cuda_events):
++                iter_metrics["Perf/dp_gradient_sync_ms_per_rank"].append(sync_time * 1000.0)
+             iter_metrics["Perf/dp_gradient_sync_calls_per_rank"].append(float(sync_calls))
+ 
+     def _aggregate_log_statistics(
+@@ -621,7 +634,13 @@ class DoubleBufferOffPolicyRunner(OffPolicyRunner):
+             super().close()
+         finally:
+             if self.dp_sync is not None:
+-                self.dp_sync.close()
++                # Captured NCCL nodes retain the communicator. Destroy the
++                # learner graph before destroying its process group, otherwise
++                # ncclCommDestroy can wait forever for the graph reference.
++                try:
++                    self.learner.set_gradient_sync(None)
++                finally:
++                    self.dp_sync.close()
+ 
+     def _collector_env_cfg_override(self) -> dict | None:
+         """Env override copy for the collector process, with per-rank CPU ids.
+diff --git a/tests/algos/test_fast_sac_compile.py b/tests/algos/test_fast_sac_compile.py
+index 52da03b..f8fe5ba 100644
+--- a/tests/algos/test_fast_sac_compile.py
++++ b/tests/algos/test_fast_sac_compile.py
+@@ -134,14 +134,76 @@ def test_fast_sac_whole_cycle_uses_max_autotune_without_nested_graphs(monkeypatc
+     ]
+ 
+ 
+-def test_fast_sac_gradient_sync_rejects_dp_in_whole_cycle_mode() -> None:
++def test_fast_sac_gradient_sync_invalidates_captured_cycle() -> None:
+     learner = _small_fast_sac_learner()
+     learner._compile_full_update_cycle = True
++    learner._update_cycle_graph_cache_key = ("old",)
+ 
+-    with pytest.raises(RuntimeError, match="does not support DP fallback"):
+-        learner.set_gradient_sync(lambda _parameters: None)
++    def sync(_parameters):
++        pass
+ 
++    learner.set_gradient_sync(sync)
++    assert learner._gradient_sync is sync
++    assert learner._update_cycle_graph_cache_key is None
+     assert learner.use_update_cycle is True
++    learner.set_gradient_graph_hooks(lambda: None, lambda: None, lambda: None)
++    learner._update_cycle_graph_cache_key = ("same",)
++    learner.set_gradient_sync(sync)
++    assert learner._update_cycle_graph_cache_key == ("same",)
++    learner.set_gradient_sync(None)
++    assert learner._update_cycle_graph_cache_key is None
++    assert learner._gradient_graph_hooks is None
++
++
++@pytest.mark.parametrize("optimizer_name", ["q_optimizer", "actor_optimizer", "alpha_optimizer"])
++def test_dp_nonfinite_loss_with_finite_gradients_arms_same_gate(optimizer_name, monkeypatch):
++    """A loss constant can overflow on one rank without corrupting its gradients."""
++    for rank in range(2):
++        learner = _small_fast_sac_learner()
++        learner._device_type = "cuda"  # Exercise gate math with CPU tensors.
++        learner._host_finite_checks = False
++        optimizer = getattr(learner, optimizer_name)
++        parameter = optimizer.param_groups[0]["params"][0]
++        parameter.grad = torch.ones_like(parameter)
++        sentinel_pointer = learner._gradient_loss_flag.grad.data_ptr()
++
++        def average(parameters):
++            parameters = list(parameters)
++            assert parameters[-1] is learner._gradient_loss_flag
++            flag = parameters[-1].grad
++            assert flag.item() == float(rank == 0)
++            flag.add_(float(rank == 1)).div_(2)
++
++        learner.set_gradient_sync(average)
++        monkeypatch.setattr(torch, "_amp_foreach_non_finite_check_and_unscale_", lambda *args: None)
++        loss = torch.tensor(float("inf") if rank == 0 else 1.0)
++        learner._sync_loss_gradients([parameter], loss)
++        learner._arm_optimizer_finite_gate(optimizer, loss)
++        assert learner._optimizer_found_inf.item() == 1.0
++        assert learner._gradient_loss_flag.grad.data_ptr() == sentinel_pointer
++        assert torch.isfinite(parameter.grad).all()
++
++
++def test_gradient_graph_capture_hook_ends_when_warmup_fails(monkeypatch):
++    learner = _small_fast_sac_learner()
++    events = []
++    learner.set_gradient_graph_hooks(
++        lambda: events.append("begin"), lambda: events.append("end"), lambda: None
++    )
++
++    def fail(*args, **kwargs):
++        raise RuntimeError("warmup failed")
++
++    monkeypatch.setattr(learner, "_warm_update_cycle_graph", fail)
++    with pytest.raises(RuntimeError, match="warmup failed"):
++        learner._ensure_update_cycle_graph(
++            {"obs": torch.zeros(2, 4)},
++            updates_per_step=1,
++            policy_frequency=1,
++            target_frequency=1,
++            policy_before_critic=False,
++        )
++    assert events == ["begin", "end"]
+ 
+ 
+ def test_fast_sac_update_cycle_rejects_compatibility_fallback() -> None:
+@@ -694,6 +756,12 @@ def test_fast_sac_update_cycle_rekeys_on_shape_and_invalidates_checkpoint() -> N
+         use_layer_norm=False,
+         use_compile=True,
+     )
++    hook_events = []
++    learner.set_gradient_graph_hooks(
++        lambda: hook_events.append("begin"),
++        lambda: hook_events.append("end"),
++        lambda: hook_events.append("replay"),
++    )
+     batch = {
+         "obs": torch.randn(16, 4, device="cuda:0"),
+         "critic": torch.randn(16, 5, device="cuda:0"),
+@@ -731,6 +799,8 @@ def test_fast_sac_update_cycle_rekeys_on_shape_and_invalidates_checkpoint() -> N
+     )
+     assert all(math.isfinite(value) for value in learner.read_deferred_cycle_metrics().values())
+ 
++    assert hook_events == ["begin", "end", "replay", "begin", "end", "replay"]
++
+     learner.load_state_dict(learner.get_state_dict())
+     assert learner._update_cycle_graph is None
+     assert learner._update_cycle_graph_cache_key is None
+diff --git a/tests/ipc/test_dp_sync.py b/tests/ipc/test_dp_sync.py
+index 13cfb8e..842f4c5 100644
+--- a/tests/ipc/test_dp_sync.py
++++ b/tests/ipc/test_dp_sync.py
+@@ -230,6 +230,78 @@ def test_close_without_start_is_idempotent(tmp_path: Path):
+     sync.close()
+ 
+ 
++def test_gradient_graph_metrics_count_replays_and_consume_events(tmp_path: Path, monkeypatch):
++    """Capture adds no steps; each replay contributes its GPU event duration."""
++    events = []
++
++    class FakeEvent:
++        def __init__(self, *, enable_timing, external):
++            assert enable_timing and external
++            self.recorded = False
++            self.waits = 0
++            events.append(self)
++
++        def record(self):
++            self.recorded = True
++
++        def synchronize(self):
++            self.waits += 1
++
++        def elapsed_time(self, end):
++            assert self.recorded and end.recorded
++            return 2.5
++
++    capturing = False
++    monkeypatch.setattr(torch.cuda, "Event", FakeEvent)
++    monkeypatch.setattr(torch.cuda, "is_current_stream_capturing", lambda: capturing)
++    monkeypatch.setattr("uni_rl.ipc.dp_sync.dist.all_reduce", lambda *args, **kwargs: None)
++    sync = DpParameterSync(
++        world_size=2, rank=0, rendezvous_path=str(tmp_path / "unused"), backend="gloo"
++    )
++    parameter = torch.nn.Parameter(torch.ones(3))
++    parameter.grad = torch.ones_like(parameter)
++    sync.begin_gradient_graph_capture()
++    sync.allreduce_gradients([parameter])  # warmup is excluded by end_capture
++    assert events == []
++    capturing = True
++    sync.allreduce_gradients([parameter])
++    sync.allreduce_gradients([parameter])
++    sync.end_gradient_graph_capture()
++    assert sync.take_gradient_sync_metrics() == (0.0, 0)
++    sync.record_gradient_graph_replay()
++    assert sync.take_gradient_sync_metrics() == pytest.approx((0.005, 2))
++    assert sync.take_gradient_sync_metrics() == (0.0, 0)
++    sync.record_gradient_graph_replay()
++    # If the owner skips a metrics boundary, consume old events before replay.
++    sync.record_gradient_graph_replay()
++    assert sync.take_gradient_sync_metrics() == pytest.approx((0.010, 4))
++    assert [event.waits for event in events] == [0, 3, 0, 3]
++    sync.begin_gradient_graph_capture()
++    sync.end_gradient_graph_capture()
++    sync.record_gradient_graph_replay()
++    assert sync.take_gradient_sync_metrics() == (0.0, 0)
++
++
++def test_gradient_graph_counts_without_timing_events(tmp_path: Path, monkeypatch):
++    monkeypatch.setattr(torch.cuda, "is_current_stream_capturing", lambda: True)
++    monkeypatch.setattr("uni_rl.ipc.dp_sync.dist.all_reduce", lambda *args, **kwargs: None)
++
++    def unexpected_event(**_kwargs):
++        pytest.fail("Timing-disabled capture must not create CUDA events")
++
++    monkeypatch.setattr(torch.cuda, "Event", unexpected_event)
++    sync = DpParameterSync(
++        world_size=2, rank=0, rendezvous_path=str(tmp_path / "unused"), backend="gloo"
++    )
++    parameter = torch.nn.Parameter(torch.ones(3))
++    parameter.grad = torch.ones_like(parameter)
++    sync.begin_gradient_graph_capture(enable_timing=False)
++    sync.allreduce_gradients([parameter])
++    sync.end_gradient_graph_capture()
++    sync.record_gradient_graph_replay()
++    assert sync.take_gradient_sync_metrics() == (0.0, 1)
++
++
+ def test_invalid_world_size_and_rank_are_rejected(tmp_path: Path):
+     path = str(tmp_path / "unused")
+     with pytest.raises(ValueError, match="world_size >= 2"):
+diff --git a/tests/logging/test_metric_schema.py b/tests/logging/test_metric_schema.py
+index 2bc0adb..f655648 100644
+--- a/tests/logging/test_metric_schema.py
++++ b/tests/logging/test_metric_schema.py
+@@ -119,12 +119,20 @@ def test_reward_terms_are_namespaced_and_reserved_names_fail_closed() -> None:
+             validate_metric_tags([invalid_tag])
+ 
+ 
+-def test_dp_metrics_use_explicit_per_rank_units() -> None:
++@pytest.mark.parametrize("graph_mode", [False, True])
++@pytest.mark.parametrize("timing_enabled", [False, True])
++def test_dp_metrics_use_explicit_per_rank_units(graph_mode, timing_enabled) -> None:
+     runner = object.__new__(DoubleBufferOffPolicyRunner)
+     runner.dp_sync = SimpleNamespace(take_gradient_sync_metrics=lambda: (0.25, 3))
++    runner.learner = SimpleNamespace(use_update_cycle=graph_mode)
++    runner.trace_enabled = timing_enabled
++    runner.trace_cuda_events = True
+     iter_metrics: defaultdict[str, list[float]] = defaultdict(list)
+ 
+     runner._collect_dp_sync_metrics(iter_metrics)
+ 
+-    assert iter_metrics["Perf/dp_gradient_sync_ms_per_rank"] == [250.0]
++    if not graph_mode or timing_enabled:
++        assert iter_metrics["Perf/dp_gradient_sync_ms_per_rank"] == [250.0]
++    else:
++        assert "Perf/dp_gradient_sync_ms_per_rank" not in iter_metrics
+     assert iter_metrics["Perf/dp_gradient_sync_calls_per_rank"] == [3.0]
+diff --git a/tests/algos/test_dp_graph_lifecycle.py b/tests/algos/test_dp_graph_lifecycle.py
+new file mode 100644
+index 0000000..f12643f
+--- /dev/null
++++ b/tests/algos/test_dp_graph_lifecycle.py
+@@ -0,0 +1,33 @@
++"""Captured collectives must release their communicator before group teardown."""
++
++from types import SimpleNamespace
++
++import pytest
++
++from uni_rl.offpolicy.double_buffer_runner import DoubleBufferOffPolicyRunner
++from uni_rl.offpolicy.runner import OffPolicyRunner
++
++
++@pytest.mark.parametrize("ipc_fails", [False, True])
++def test_runner_releases_captured_communication_before_process_group(monkeypatch, ipc_fails):
++    events = []
++
++    def close_ipc(_runner):
++        events.append("ipc")
++        if ipc_fails:
++            raise RuntimeError("ipc cleanup failed")
++
++    def detach(sync):
++        assert sync is None
++        events.append("graph")
++
++    monkeypatch.setattr(OffPolicyRunner, "close", close_ipc)
++    runner = object.__new__(DoubleBufferOffPolicyRunner)
++    runner.learner = SimpleNamespace(set_gradient_sync=detach)
++    runner.dp_sync = SimpleNamespace(close=lambda: events.append("group"))
++    if ipc_fails:
++        with pytest.raises(RuntimeError, match="ipc cleanup failed"):
++            runner.close()
++    else:
++        runner.close()
++    assert events == ["ipc", "graph", "group"]

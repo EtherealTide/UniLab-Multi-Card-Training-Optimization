@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/run_matrix.py",
+    "n2_shm",
+    "--trace",
+    "--prefix",
+    "simple"
+  ],
+  "extra_environment": {
+    "NCCL_PROTO": "Simple"
+  }
+}

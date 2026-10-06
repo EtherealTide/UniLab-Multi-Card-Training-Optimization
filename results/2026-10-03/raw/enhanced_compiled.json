@@ -1,0 +1,280 @@
+{
+  "passed": true,
+  "ranks": [
+    {
+      "rank": 0,
+      "device": "NVIDIA GeForce RTX 5090",
+      "mode": "correctness",
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0,1",
+        "NCCL_P2P_DISABLE": "1",
+        "NCCL_SHM_DISABLE": "0",
+        "NCCL_ALGO": null,
+        "NCCL_PROTO": null
+      },
+      "torch": "2.14.0+cu130",
+      "cuda": "13.0",
+      "nccl": [
+        2,
+        30,
+        7
+      ],
+      "passed": true,
+      "compile_loss": true,
+      "warmup_preserved_state_and_rng": true,
+      "warmup_seconds": 81.99803450098261,
+      "cross_rank_checks": [
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        }
+      ],
+      "updated": {
+        "actor": true,
+        "qnet": true,
+        "qnet_target": true,
+        "log_alpha": true
+      },
+      "optimizer_steps": {
+        "q_optimizer": {
+          "min": 24.0,
+          "max": 24.0,
+          "expected": 24
+        },
+        "alpha_optimizer": {
+          "min": 24.0,
+          "max": 24.0,
+          "expected": 24
+        },
+        "actor_optimizer": {
+          "min": 6.0,
+          "max": 6.0,
+          "expected": 6
+        }
+      },
+      "log_alpha_by_replay": [
+        -6.905360221862793,
+        -6.902968883514404,
+        -6.900574207305908
+      ],
+      "replay_sync_metrics": [
+        {
+          "replay": 0,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.001180351996794343
+        },
+        {
+          "replay": 1,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.0008040000014007091
+        },
+        {
+          "replay": 2,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.000804192004725337
+        }
+      ],
+      "recapture": {
+        "updates": 4,
+        "batch_size": 65,
+        "warmup_preserved_state_and_rng": true,
+        "sync_calls": 9,
+        "expected_sync_calls": 9,
+        "cuda_event_sum_seconds": 0.014738528391346338,
+        "cross_rank": {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        }
+      },
+      "invalid_loss_checks": [
+        {
+          "optimizer": "q_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        },
+        {
+          "optimizer": "alpha_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        },
+        {
+          "optimizer": "actor_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        }
+      ],
+      "scope": "synthetic correctness only; not a throughput baseline"
+    },
+    {
+      "rank": 1,
+      "device": "NVIDIA GeForce RTX 5090",
+      "mode": "correctness",
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0,1",
+        "NCCL_P2P_DISABLE": "1",
+        "NCCL_SHM_DISABLE": "0",
+        "NCCL_ALGO": null,
+        "NCCL_PROTO": null
+      },
+      "torch": "2.14.0+cu130",
+      "cuda": "13.0",
+      "nccl": [
+        2,
+        30,
+        7
+      ],
+      "passed": true,
+      "compile_loss": true,
+      "warmup_preserved_state_and_rng": true,
+      "warmup_seconds": 82.01720125001157,
+      "cross_rank_checks": [
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        },
+        {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        }
+      ],
+      "updated": {
+        "actor": true,
+        "qnet": true,
+        "qnet_target": true,
+        "log_alpha": true
+      },
+      "optimizer_steps": {
+        "q_optimizer": {
+          "min": 24.0,
+          "max": 24.0,
+          "expected": 24
+        },
+        "alpha_optimizer": {
+          "min": 24.0,
+          "max": 24.0,
+          "expected": 24
+        },
+        "actor_optimizer": {
+          "min": 6.0,
+          "max": 6.0,
+          "expected": 6
+        }
+      },
+      "log_alpha_by_replay": [
+        -6.905360221862793,
+        -6.902968883514404,
+        -6.900574207305908
+      ],
+      "replay_sync_metrics": [
+        {
+          "replay": 0,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.0011609919890761375
+        },
+        {
+          "replay": 1,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.0010129279950633642
+        },
+        {
+          "replay": 2,
+          "sync_calls": 18,
+          "cuda_event_sum_seconds": 0.0010661120051518084
+        }
+      ],
+      "recapture": {
+        "updates": 4,
+        "batch_size": 65,
+        "warmup_preserved_state_and_rng": true,
+        "sync_calls": 9,
+        "expected_sync_calls": 9,
+        "cuda_event_sum_seconds": 0.0004571200013160705,
+        "cross_rank": {
+          "max_abs_error": 0.0,
+          "state_tensors_checked": 212
+        }
+      },
+      "invalid_loss_checks": [
+        {
+          "optimizer": "q_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        },
+        {
+          "optimizer": "alpha_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        },
+        {
+          "optimizer": "actor_optimizer",
+          "bad_loss_rank": 0,
+          "gradients_finite": true,
+          "both_ranks_skipped": true,
+          "model_optimizer_state_unchanged": true,
+          "target_unchanged": true,
+          "cross_rank": {
+            "max_abs_error": 0.0,
+            "state_tensors_checked": 212
+          }
+        }
+      ],
+      "scope": "synthetic correctness only; not a throughput baseline"
+    }
+  ],
+  "spawn_error": null
+}

@@ -1,0 +1,12 @@
+[
+  "taskset",
+  "--cpu-list",
+  "8-39,48-79",
+  "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+  "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/run_matrix.py",
+  "n1",
+  "n2_shm",
+  "--prefix",
+  "reserved",
+  "--trace"
+]

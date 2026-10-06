@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/dp_probe.py",
+    "correctness",
+    "--output",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/correctness_simple.json"
+  ],
+  "extra_environment": {
+    "NCCL_PROTO": "Simple"
+  }
+}

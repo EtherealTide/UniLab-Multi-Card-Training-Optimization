@@ -1,0 +1,13 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--no-sync",
+    "pytest",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/unilab_rl/tests/algos/test_fast_sac_compile.py",
+    "-q"
+  ],
+  "environment_overrides": {
+    "CUDA_VISIBLE_DEVICES": "0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab/.venv/bin/python",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/dp_probe.py",
+    "communication",
+    "--bytes",
+    "4",
+    "896976",
+    "3936444",
+    "--output",
+    "/mnt/gfs/home/liangyu/desktop/UniLabSim/experiments/sac_20261002/comm_simple.json"
+  ],
+  "extra_environment": {
+    "NCCL_PROTO": "Simple"
+  }
+}
