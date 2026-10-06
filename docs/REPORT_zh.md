@@ -140,7 +140,7 @@ CPU 池布局影响了 learner 进度与 IPC，而不只是物理仿真速度。
 
 ## 6. 复现入口与证据
 
-环境准备、补丁应用、真实训练和三次矩阵复测见 [README](../README.md)。下面使用其中设置的路径与 `PYTHONPATH`，从 UniLab 目录执行诊断；输出目录须为新目录。性能测试与诊断分开串行运行。
+真实训练和三次矩阵复测见 [README](../README.md)。下面使用其复测章节设置的路径与 `PYTHONPATH`，从 UniLab 目录执行诊断；输出目录须为新目录。性能测试与诊断分开串行运行。
 
 ```bash
 # 隔离通信；改成 NCCL_SHM_DISABLE=1 可对照默认传输。
@@ -157,7 +157,7 @@ CUDA_VISIBLE_DEVICES=0,1 NCCL_SHM_DISABLE=0 uv run --no-sync python \
   "training.log_dir=$UNILAB_EXPERIMENT_DIR/events_diag"
 ```
 
-诊断最终 CPU 池时追加完整列表 `training.dp_collector_cpu_ids=[[8,...,39],[48,...,79]]`（这里的省略号须替换为完整整数序列，可由 README 的 `--dry-run` 获取）。Nsight 入口为 [nsys_training.py](../scripts/nsys_training.py)，支持相同 Hydra 参数，在第 190～200 轮采样；可用以下命令启动自动池诊断，需要预装 `nsys`：
+诊断最终 CPU 池时追加 README 中用 `seq` 生成的 `training.dp_collector_cpu_ids` 参数。Nsight 入口为 [nsys_training.py](../scripts/nsys_training.py)，支持相同 Hydra 参数，在第 190～200 轮采样；可用以下命令启动自动池诊断，需要预装 `nsys`：
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 NCCL_SHM_DISABLE=0 nsys profile \

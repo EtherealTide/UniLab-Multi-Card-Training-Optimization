@@ -12,148 +12,116 @@
 
 这是 CPU 配额、collector 和 GPU 一起扩展的**端到端弱扩展**，不是补丁独立收益或纯 GPU 扩展效率。双卡全局环境数 / batch 加倍；尚未验证长期收敛。全部版本、参数、逐次数据、分析与限制见 [技术报告](docs/REPORT_zh.md)。
 
-## 从源码安装并训练
+## 直接在 UniLab 中使用
 
-以下在 Linux GPU 服务器执行，需要 Git、uv 和可运行 MuJoCo 的 UniLab 环境。已有三个源码仓库时跳过克隆步骤；复现历史结果需使用固定版本，勿重置已有修改。
+以下假设你已有可运行的 UniLab 环境，所用 `uni_rl` 已包含本文优化。只需要 UniLab 项目，不需要克隆本实验仓库或准备三个源码目录。命令在 UniLab 根目录执行；示例路径替换成你自己的路径。
 
-### 1. 准备源码与环境
+### 单卡与双卡对照（UniLab 自带 benchmark）
 
 ```bash
-git clone https://github.com/EtherealTide/UniLab-Multi-Card-Training-Optimization.git
-export OPT_REPO="$(realpath UniLab-Multi-Card-Training-Optimization)"
-export UNILAB_WORKSPACE="$HOME/desktop/UniLabSim"
-
-# 仅用于新的空工作区。
-mkdir -p "$UNILAB_WORKSPACE"
-git clone https://github.com/unilabsim/UniLab.git "$UNILAB_WORKSPACE/UniLab"
-git clone https://github.com/unilabsim/unilab_rl.git "$UNILAB_WORKSPACE/unilab_rl"
-git clone https://github.com/unilabsim/unisim.git "$UNILAB_WORKSPACE/unisim"
+cd /mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab
+CUDA_VISIBLE_DEVICES=0,1 NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=0 \
+uvx uv@0.12.5 run --no-sync \
+  scripts/benchmark/rl/benchmark_offpolicy_dp_scaling.py \
+  --iterations 60 \
+  --devices 0,1 \
+  --extra-overrides \
+    training.trace_enabled=true
 ```
 
-日常使用可保留克隆得到的版本，但需检查补丁兼容性；要复现报告，先固定以下版本。上游已合入优化时无需再次应用补丁。
+该命令**先跑单卡，再跑双卡**，任务默认是 SAC / G1WalkFlat / MuJoCo。选择物理 GPU 4、5 时，把 `CUDA_VISIBLE_DEVICES=0,1` 改为 `CUDA_VISIBLE_DEVICES=4,5`，`--devices 0,1` 保持不变，因为它使用可见设备的逻辑索引。
+
+仅运行单卡 benchmark（例如物理 GPU 4）：
 
 ```bash
-# 可选：切换到报告使用的版本，仅在新克隆的干净仓库执行。
-git -C "$UNILAB_WORKSPACE/UniLab" checkout --detach 0fd2bd5d72210ad685838ade4ba4687b269f7de2
-git -C "$UNILAB_WORKSPACE/unilab_rl" checkout --detach e2f18b4df1dcb0c35cd4c2dccd0517151633e53d
-git -C "$UNILAB_WORKSPACE/unisim" checkout --detach 783220d64ba7a207d316f1dd06ccd1a1db1261bc
+CUDA_VISIBLE_DEVICES=4 uvx uv@0.12.5 run --no-sync \
+  scripts/benchmark/rl/benchmark_offpolicy_dp_scaling.py \
+  --iterations 60 \
+  --devices 0 \
+  --extra-overrides \
+    training.trace_enabled=true
 ```
 
-安装环境：
+当前脚本中，`--devices` 只有一个索引时仅跳过双卡组，单卡基线仍使用默认可见 GPU；所以单卡选卡应通过 `CUDA_VISIBLE_DEVICES` 完成。`--extra-overrides` 中的配置会同时传给单卡和双卡组。
+
+结果默认写入 `scripts/benchmark/outputs/offpolicy_dp_scaling/results.json`，训练日志在其 `runs/` 下。重复运行会替换同名 `n1/n2` 目录；需要保留时先复制旧结果，单独修改 `--out-json` 不会更改训练目录。
+
+60 轮 + trace 适合快速诊断；正式测量使用 `--iterations 1000` 和 `training.trace_enabled=false`。此 benchmark 的 Steps/s 是尾段 `Perf/total_fps` 均值，与本报告的累计环境步数差 / 墙钟时间差不同，不能直接拿其 scaling 数字与 2.165× 比较。
+
+### 只启动单卡或双卡训练
+
+如果不需要先跑单卡基线，直接使用 UniLab 训练入口。以下两个命令任选其一；无需额外调用 `torchrun`：
 
 ```bash
-cd "$UNILAB_WORKSPACE/UniLab"
-uv sync --extra mujoco
-```
+cd /mnt/gfs/home/liangyu/desktop/UniLabSim/UniLab
 
-依赖和资产按固定版本上游要求安装；`uv sync` 不保证重建历史二进制环境。对照报告核对版本与拓扑：
-
-```bash
-nvidia-smi topo -m
-lscpu -e=CPU,CORE,SOCKET,NODE
-uv run --no-sync python -c 'import torch,mujoco; print(torch.__version__,torch.version.cuda,torch.cuda.nccl.version(),mujoco.__version__)'
-```
-
-### 2. 应用补丁，启用修改后的算法库
-
-```bash
-git -C "$UNILAB_WORKSPACE/unilab_rl" apply --check "$OPT_REPO/patches/unilab_rl_optimization.patch" &&
-git -C "$UNILAB_WORKSPACE/unilab_rl" apply "$OPT_REPO/patches/unilab_rl_optimization.patch"
-export PYTHONPATH="$UNILAB_WORKSPACE/UniLab/src:$UNILAB_WORKSPACE/unilab_rl/src:$UNILAB_WORKSPACE/unisim/src"
-uv run --no-sync python -c 'import uni_rl; print(uni_rl.__file__)'
-```
-
-导入路径应指向工作区 `unilab_rl/src`。已应用补丁的实验服务器无需重复应用；新版上游若检查失败，应先解决兼容性。
-
-### 3. 直接启动单卡 / 双卡训练（指定 GPU）
-
-以下直接调用 UniLab 入口，不依赖本仓库实验启动器。先完成上述环境、补丁和 `PYTHONPATH` 设置；新终端中重新设置路径和 `PYTHONPATH`。两个命令任选其一，每次使用新的日志目录。
-
-```bash
-cd "$UNILAB_WORKSPACE/UniLab"
-mkdir -p "$UNILAB_WORKSPACE/training_runs"
-# 清除此前诊断实验可能留下的 NCCL 覆盖。
-unset NCCL_PROTO NCCL_ALGO NCCL_GRAPH_MIXING_SUPPORT NCCL_GRAPH_STREAM_ORDERING
-
-# 单卡：物理 GPU 4；进程中它被重新编号为 cuda:0。
-CUDA_VISIBLE_DEVICES=4 uv run --no-sync python src/unilab/scripts/train_sac.py \
+# 只跑单卡，物理 GPU 4。
+CUDA_VISIBLE_DEVICES=4 uvx uv@0.12.5 run --no-sync \
+  src/unilab/scripts/train_sac.py \
   task=g1_walk_flat/mujoco 'training.devices=[0]' \
-  training.no_play=true training.trace_enabled=false algo.max_iterations=1000 \
-  "training.log_dir=$UNILAB_WORKSPACE/training_runs/single_gpu4_01"
+  algo.max_iterations=1000 training.no_play=true training.trace_enabled=false
 
-# 双卡：物理 GPU 4、5；进程可见索引为 0、1。
-CUDA_VISIBLE_DEVICES=4,5 NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=0 \
-  uv run --no-sync python src/unilab/scripts/train_sac.py \
+# 只跑双卡，物理 GPU 0、1；换成4、5只需修改CUDA_VISIBLE_DEVICES。
+CUDA_VISIBLE_DEVICES=0,1 NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=0 \
+uvx uv@0.12.5 run --no-sync \
+  src/unilab/scripts/train_sac.py \
   task=g1_walk_flat/mujoco 'training.devices=[0,1]' \
-  training.no_play=true training.trace_enabled=false algo.max_iterations=1000 \
-  "training.log_dir=$UNILAB_WORKSPACE/training_runs/dual_gpu45_01"
+  algo.max_iterations=1000 training.no_play=true training.trace_enabled=false
 ```
 
-换卡只需修改 `CUDA_VISIBLE_DEVICES`：例如双卡改成 `0,1`，单卡改成 `0`。**`training.devices` 填可见设备的逻辑索引**：设置 `CUDA_VISIBLE_DEVICES=4,5` 后仍写 `[0,1]`，不要写 `[4,5]`。入口自动启动多 rank，无需额外包 `torchrun`。示例运行 1000 轮，日常训练可调整 `algo.max_iterations`；每 rank 的任务默认值仍是 2048 环境、8192 batch、每轮 8 次 critic / temperature 与 2 次 actor 更新。
+日志使用 UniLab 默认的时间戳目录，也可追加 `training.log_dir=/你的新目录`。`algo.max_iterations` 控制训练长度；上述命令保留任务默认的每 rank 2048 环境、8192 batch、每轮 8 次 critic / temperature 与 2 次 actor 更新。`uv@0.12.5` 用于匹配这里的调用方式，不代表历史实验已验证该 uv 版本。
 
-### 4. 启用本机实测 CPU 池配置
+### 使用报告中的仿真 CPU 池配置
 
-上一节使用默认仿真 CPU 配置，可直接训练，但不等同于报告的最终吞吐。要使用实测配置，在本报告服务器上运行：
+默认 CPU 配置能启动训练，但不等同于报告最终性能。本报告服务器的双卡 GPU 0–1 使用两个各 32 物理核的仿真池，完整命令为：
 
 ```bash
 pool0="$(seq -s, 8 39)"
 pool1="$(seq -s, 48 79)"
-
-# 报告最终双卡配置：GPU 0、1；每个仿真池32个物理核。
 CUDA_VISIBLE_DEVICES=0,1 NCCL_P2P_DISABLE=1 NCCL_SHM_DISABLE=0 \
-  uv run --no-sync python src/unilab/scripts/train_sac.py \
+uvx uv@0.12.5 run --no-sync \
+  src/unilab/scripts/train_sac.py \
   task=g1_walk_flat/mujoco 'training.devices=[0,1]' \
   "training.dp_collector_cpu_ids=[[$pool0],[$pool1]]" \
-  training.no_play=true training.trace_enabled=false algo.max_iterations=1000 \
-  "training.log_dir=$UNILAB_WORKSPACE/training_runs/dual_pool32_01"
-
-# 报告单卡对照：GPU 0；本地32物理核仿真池。
-CUDA_VISIBLE_DEVICES=0 uv run --no-sync python src/unilab/scripts/train_sac.py \
-  task=g1_walk_flat/mujoco 'training.devices=[0]' \
-  "+env.cpu_ids=[$pool0]" \
-  training.no_play=true training.trace_enabled=false algo.max_iterations=1000 \
-  "training.log_dir=$UNILAB_WORKSPACE/training_runs/single_pool32_01"
+  algo.max_iterations=1000 training.no_play=true training.trace_enabled=false
 ```
 
-换服务器或 GPU 组合时，结合 `lscpu` 和 GPU 拓扑重新选择 CPU 池并实测；上述 CPU 编号不是通用配置，GPU 4–5 也没有最终池配置的三次性能验证。只设置仿真池，不在外层包 `taskset` / `numactl`，以免同时限制 learner/NCCL。
+单卡本地池对照是在上述单卡训练命令中追加 `"+env.cpu_ids=[$pool0]"`，并使用物理 GPU 0。CPU 列表按 rank 顺序分配；换服务器或 GPU 组合时先检查 `lscpu -e=CPU,CORE,SOCKET,NODE` 和 `nvidia-smi topo -m`，重新选择并实测。不要在外层包 `taskset` / `numactl`，以免同时限制 learner/NCCL。
 
-## 实验复现与检查
+## 用本仓库复现实验
 
-本仓库启动器提供 GPU 0–1 的固定实验预设；任意指定卡索引请使用上面的直接训练命令。
-
-```bash
-uv run --no-sync python "$OPT_REPO/scripts/run_optimized.py" \
-  --cards 2 --iterations 1000 \
-  --log-dir "$UNILAB_WORKSPACE/experiment_runs/dual_01"
-```
-
-单卡对照使用 `--cards 1 --single-pool local32` 和新目录；`--dry-run` 打印完整命令。此启动器会覆盖外部 `CUDA_VISIBLE_DEVICES`，不能通过外部环境变量切换到 4–5。CPU 预设位于 [CPU_POOLS](scripts/experiment_paths.py)。重复实验与验证：
+以下为历史实验的独立复测入口，需要技术报告记录的三个源码版本及优化代码、对应运行环境。它与上面的“仅使用 UniLab”训练入口分开；版本及差异见 [技术报告](docs/REPORT_zh.md)，这里不包含代码安装步骤。
 
 ```bash
+export OPT_REPO="/你的路径/UniLab-Multi-Card-Training-Optimization"
+export UNILAB_WORKSPACE="/你的路径/UniLabSim"
+# 历史复测脚本要求该目录下有 UniLab/、unilab_rl/、unisim/。
+export PYTHONPATH="$UNILAB_WORKSPACE/UniLab/src:$UNILAB_WORKSPACE/unilab_rl/src:$UNILAB_WORKSPACE/unisim/src"
 export UNILAB_EXPERIMENT_DIR="$UNILAB_WORKSPACE/experiment_runs/reproduce"
+cd "$UNILAB_WORKSPACE/UniLab"
 unset CUDA_VISIBLE_DEVICES NCCL_PROTO NCCL_ALGO NCCL_GRAPH_MIXING_SUPPORT NCCL_GRAPH_STREAM_ORDERING
 
 # 单卡本地32核 / 双卡各32核，交替三组；串行运行，使用新prefix。
-uv run --no-sync python "$OPT_REPO/scripts/run_matrix.py" \
+uvx uv@0.12.5 run --no-sync python "$OPT_REPO/scripts/run_matrix.py" \
   n1_local32 n2_pool32 --repeats 3 --iterations 1000 --prefix repro
 
-uv run --no-sync python "$OPT_REPO/scripts/analyze_run.py" \
+uvx uv@0.12.5 run --no-sync python "$OPT_REPO/scripts/analyze_run.py" \
   "$UNILAB_EXPERIMENT_DIR/repro_r1_n2_pool32" \
   --output "$UNILAB_EXPERIMENT_DIR/recomputed_metrics.json"
 
-CUDA_VISIBLE_DEVICES=0,1 NCCL_SHM_DISABLE=0 uv run --no-sync python \
+CUDA_VISIBLE_DEVICES=0,1 NCCL_SHM_DISABLE=0 uvx uv@0.12.5 run --no-sync python \
   "$OPT_REPO/scripts/dp_probe.py" correctness --compile-loss \
   --output "$UNILAB_EXPERIMENT_DIR/correctness.json"
 
-uv run --no-project python "$OPT_REPO/scripts/verify_repository.py"
+uvx uv@0.12.5 run --no-project python "$OPT_REPO/scripts/verify_repository.py"
 ```
 
-主指标是最后 50% TensorBoard 事件的累计总环境步数差 / 墙钟时间差，排除冷启动，不用瞬时 FPS 均值。矩阵保存命令、版本、配置和结果。历史运行顺序是先 `n1_total64 n2_pool32` 交替三组，再单独运行三次 `n1_local32`；上面的新复测采用交替本地池对照。
+主指标是最后 50% TensorBoard 事件的累计总环境步数差 / 墙钟时间差，排除冷启动。历史顺序是先 `n1_total64 n2_pool32` 交替三组，再单独三次 `n1_local32`；上面的新复测采用交替本地池对照。脚本的 CPU 预设见 [CPU_POOLS](scripts/experiment_paths.py)。
 
 ## 仓库内容
 
 - [技术报告](docs/REPORT_zh.md)：改动、设计依据、版本、参数、详细数据、验证与诊断复现。
-- [补丁](patches/unilab_rl_optimization.patch)：3 个生产文件、4 个测试文件，面向上述固定 RL 版本。
+- [补丁](patches/unilab_rl_optimization.patch)：3 个生产文件、4 个测试文件，面向技术报告记录的固定 RL 版本。
 - [实验代码](scripts/)；[汇总](results/2026-10-03/summary.json)、[原始指标](results/2026-10-03/raw/)、[验证日志](results/2026-10-03/validation/)。
 - [原始证据包](artifacts/sac_20261002_evidence.zip)与[哈希清单](artifacts/evidence_manifest.json)：335 项资料，保留历史脚本、日志、报告与 trace 供审计；日常使用以上两个文档。
 
